@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lastfm-msvd"
+version = "0.1.0"
+description = "Last.fm ingestion and confidence-weighted implicit preference data"
+requires-python = ">=3.12"
+dependencies = ["duckdb>=1.4,<2", "numpy>=2,<3", "scipy>=1.15,<2", "pytz>=2025"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10"]
+docs = ["reportlab>=4,<5"]
+
+[project.scripts]
+lastfm = "lastfm.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["python"]
+
+[tool.pytest.ini_options]
+pythonpath = ["python"]
+testpaths = ["tests"]

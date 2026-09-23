@@ -9,10 +9,15 @@ temporary files stay local. Acquire and rebuild the data with the commands below
 The handover records the September 15 milestone; its note that no remote existed
 describes that milestone, before this repository was created.
 
-Python owns acquisition, DuckDB ingestion and sparse training matrices. Go provides
-the starting point for a later recommendation service and shares the confidence
-contract. No model fitting, acoustic/tag fusion, nostalgia ranking or serving API
-is implemented yet.
+Python owns acquisition, DuckDB ingestion, sparse training matrices, weighted
+implicit ALS, Stream A discovery/tag reranking, and Stream B dormancy extraction.
+Go provides the starting point for a later recommendation service and shares the
+confidence contract. Acoustic features, contextual nostalgia scoring, stream
+blending and a serving API are not implemented yet.
+
+September 22 update: see [Stream A/B implementation](docs/streams.md). The 1K ALS
+model is trained locally. TF-IDF and weighted overlap are implemented and tested;
+real tag scoring awaits a tag corpus. The September 15 handover is historical.
 
 ## Quick start
 
@@ -27,6 +32,9 @@ uv run lastfm ingest --dataset 360k
 uv run lastfm matrix --dataset 1k --cutoff 2009-05-01T00:00:00Z --npz
 uv run lastfm matrix --dataset 360k --npz
 uv run lastfm inspect
+uv run lastfm train --dataset 1k --factors 32 --iterations 10
+uv run lastfm recommend --user-id user_000001 --k 10
+uv run lastfm dormant --dataset 1k --min-historical-plays 5
 uv run pytest -q
 go test ./...
 go run ./cmd/recommender -count 9 -kappa 40
@@ -63,7 +71,7 @@ Sources:
 ## Repository map
 
 ```text
-python/lastfm/       acquisition, ingestion, matrix builder, CLI
+python/lastfm/       ingestion, matrices, factorization, tags, discovery, dormancy, CLI
 cmd/recommender/    Go confidence CLI; future serving entry point
 internal/preference/ shared Go confidence formula and tests
 tests/              Python integration and boundary tests
@@ -73,6 +81,9 @@ data/raw/           source archives, TSVs, READMEs, SHA-256 manifests (ignored)
 data/lake/          immutable ingestion snapshots (ignored)
 data/lastfm.duckdb   persistent views over Parquet (ignored)
 artifacts/matrices/ sparse edges, mappings, metadata, optional NPZ (ignored)
+artifacts/models/   trained factors, mappings, counts and model manifests (ignored)
+artifacts/tags/     imported tag TF-IDF, relevance and coverage reports (ignored)
+artifacts/dormancy/ eligible dormant user-track pairs (ignored)
 artifacts/reports/  latest ingestion and verification results (ignored)
 output/pdf/         teammate handover PDF
 ```
@@ -97,8 +108,9 @@ Do not copy the DuckDB file by itself and expect the external data to travel wit
 Read [the data contract](docs/data-contract.md) before writing a trainer and
 [operations](docs/operations.md) before running the full pipeline. The initial
 implementation is a local research data foundation, not a production recommender.
-Next: train an implicit-feedback baseline, agree on temporal evaluation and tag
-coverage, then implement discovery fusion and nostalgia retrieval.
+Next: run chronological evaluation, acquire a tag corpus, then add contextual
+nostalgia scoring and stream blending. Current data/model verification does not
+establish recommendation accuracy.
 
 After full ingestion and matrix generation, run `uv run python scripts/verify.py`
 to refresh the full-data audit and portable `docs/verified-state.json`. Rebuild the

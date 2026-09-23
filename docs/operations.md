@@ -41,18 +41,20 @@ EXPLAIN SELECT count(*) FROM recsys.events_1k
 WHERE year=2009 AND month=4;
 ```
 
-Raw profiles are downloaded but not ingested or exposed by the Go CLI. Tag data,
-audio features, trained factors, recommendation endpoints and an evaluation suite
-remain future work. Do not report recommendation accuracy from this ingestion.
+Raw profiles are downloaded but not ingested or exposed by the Go CLI. See
+`streams.md` for the new trained factors, tag importer, discovery command and
+dormancy extraction. Real tag data, audio features, recommendation endpoints and
+a chronological evaluation suite remain future work. Do not report recommendation
+accuracy from ingestion or training-loss checks.
 
 ## Suggested work allocation
 
 | Workstream | First deliverable | Dependency |
 | --- | --- | --- |
 | Data / metadata | Tag-source coverage report and identity mapping audit | Canonical item mappings |
-| Modeling | Implicit ALS baseline consuming the confidence contract | Sparse matrix snapshot |
+| Modeling | Tune and evaluate the implemented implicit ALS baseline | Sparse matrix snapshot |
 | Evaluation | Validation/test chronology, Recall/NDCG and cold-start report | Training cutoff agreement |
-| Nostalgia | Dormant candidate retrieval using historical/active counts | Evaluation definition |
+| Nostalgia | Contextual scoring of the extracted dormant candidates | Evaluation definition and tags |
 | Go serving | Load versioned model artifacts and expose recommendation API | Trained factors and mapping contract |
 
 The team should agree on kappa tuning, cutoff dates, dormancy thresholds, tag

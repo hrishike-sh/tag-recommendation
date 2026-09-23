@@ -7,7 +7,7 @@ name = "lastfm-msvd"
 version = "0.1.0"
 description = "Last.fm ingestion and confidence-weighted implicit preference data"
 requires-python = ">=3.12"
-dependencies = ["duckdb>=1.4,<2", "numpy>=2,<3", "scipy>=1.15,<2", "pytz>=2025"]
+dependencies = ["duckdb>=1.4,<2", "numpy>=2,<3", "scipy>=1.15,<2", "pytz>=2025", "implicit>=0.7.3,<0.8", "threadpoolctl>=3,<4"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8,<10"]

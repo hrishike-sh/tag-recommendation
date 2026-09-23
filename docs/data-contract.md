@@ -97,7 +97,8 @@ min over X,Y: sum over all users and items
 The sum includes unobserved pairs at confidence 1. It is not simply SVD of `C*P`,
 and fitting only stored positive edges would optimize a different objective.
 Check a chosen ALS library's sparse-confidence convention before passing these
-exports. No solver or user/genre regularizers have been implemented in this step.
+exports. Weighted implicit ALS is now implemented (see `streams.md`). The original
+user/genre regularizers remain unspecified and have not been reproduced.
 
 Only users/items observed before the cutoff get training indices. Unseen holdout
 items/users must be reported as cold start in subsequent evaluation. No cross-user

@@ -1,0 +1,135 @@
+{
+  "verified_at": "2026-09-22T14:41:09.612194+00:00",
+  "checks": {
+    "model bound to immutable source matrix": true,
+    "dormancy and model use same snapshot": true,
+    "training count shape": true,
+    "training observed pairs": true,
+    "user factor shape": true,
+    "user factors finite": true,
+    "item factor shape": true,
+    "item factors finite": true,
+    "finite loss history": true,
+    "training loss decreased": true,
+    "user_000001: 10 distinct unseen items": true,
+    "user_000001: finite scores and no fabricated tags": true,
+    "user_000002: 10 distinct unseen items": true,
+    "user_000002: finite scores and no fabricated tags": true,
+    "user_000003: 10 distinct unseen items": true,
+    "user_000003: finite scores and no fabricated tags": true,
+    "all dormant candidates satisfy criterion": true,
+    "dormancy extraction complete": true,
+    "dormant records retain source counts and times": true,
+    "python_tests": true,
+    "go_tests": true,
+    "go_vet": true
+  },
+  "commands": {
+    "python_tests": {
+      "exit_code": 0,
+      "output": "...............                                                          [100%]\n15 passed in 1.86s\n"
+    },
+    "go_tests": {
+      "exit_code": 0,
+      "output": "?   \tlastfm-msvd/cmd/recommender\t[no test files]\nok  \tlastfm-msvd/internal/preference\t(cached)\n"
+    },
+    "go_vet": {
+      "exit_code": 0,
+      "output": ""
+    }
+  },
+  "model": {
+    "schema_version": 1,
+    "algorithm": "confidence-weighted implicit ALS + optional tag/content fusion",
+    "msvd_scope": "Implicit adaptation of the tag-M SVD pipeline; original user/genre regularizers are unspecified and not reproduced",
+    "created_at": "2026-09-22T14:31:41.399260+00:00",
+    "dataset": "1k",
+    "matrix_fingerprint": "1704b592f94eb051319221c5c6605374afbac8c6946060ce6d4631793b0848ed",
+    "shape": [
+      991,
+      1493688
+    ],
+    "observed_pairs": 4584444,
+    "cutoff": "2009-05-01T00:00:00+00:00",
+    "kappa": 40,
+    "factors": 32,
+    "regularization": 0.1,
+    "iterations": 10,
+    "seed": 42,
+    "threads": 4,
+    "solver": "CPU ALS with conjugate gradient",
+    "implicit_version": "0.7.3",
+    "content_features": "one-hot primary artist identity",
+    "training_seconds": 26.492927499988582,
+    "training_history": [
+      {
+        "epoch": 1,
+        "seconds": 2.113158702850342,
+        "library_training_loss": 0.035286553802260257
+      },
+      {
+        "epoch": 2,
+        "seconds": 2.1342825889587402,
+        "library_training_loss": 0.026594061509278368
+      },
+      {
+        "epoch": 3,
+        "seconds": 2.0475692749023438,
+        "library_training_loss": 0.024993721336313564
+      },
+      {
+        "epoch": 4,
+        "seconds": 2.080765724182129,
+        "library_training_loss": 0.0242943956612184
+      },
+      {
+        "epoch": 5,
+        "seconds": 2.0066707134246826,
+        "library_training_loss": 0.02389077523725572
+      },
+      {
+        "epoch": 6,
+        "seconds": 2.1309890747070312,
+        "library_training_loss": 0.023620918991881894
+      },
+      {
+        "epoch": 7,
+        "seconds": 2.0742175579071045,
+        "library_training_loss": 0.023423584792866964
+      },
+      {
+        "epoch": 8,
+        "seconds": 2.16926908493042,
+        "library_training_loss": 0.023272114065945204
+      },
+      {
+        "epoch": 9,
+        "seconds": 2.036527633666992,
+        "library_training_loss": 0.023152156671530588
+      },
+      {
+        "epoch": 10,
+        "seconds": 2.0170657634735107,
+        "library_training_loss": 0.023054139280281303
+      }
+    ],
+    "quality_evaluation": "not performed"
+  },
+  "dormancy": {
+    "schema_version": 1,
+    "dataset": "1k",
+    "matrix_fingerprint": "1704b592f94eb051319221c5c6605374afbac8c6946060ce6d4631793b0848ed",
+    "cutoff": "2009-05-01T00:00:00+00:00",
+    "recent_days": 90,
+    "min_historical_plays": 5,
+    "candidates": 675325,
+    "users": 875,
+    "min_days_since_last_play": 90.0002662037037,
+    "criterion": "historical_plays >= threshold AND active_plays = 0",
+    "scope": "Eligibility only; no contextual nostalgia score or Stream A/B blending yet"
+  },
+  "model_path": "artifacts/models/1k/9d7f29a6ad9f",
+  "dormancy_path": "artifacts/dormancy/1k/d32c2375f2c7",
+  "tag_status": "Implemented and tested with synthetic fixtures; real corpus not supplied",
+  "quality_evaluation": "No held-out relevance metrics have been measured"
+}

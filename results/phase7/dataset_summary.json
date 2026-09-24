@@ -1,0 +1,10 @@
+{
+  "dataset": "Last.fm 1K",
+  "clean_events": 19150865,
+  "total_users": 992,
+  "unique_tracks": 1505185,
+  "train_catalog_items": 1493688,
+  "train_cutoff": "2009-04-01T00:00:00+00:00",
+  "val_cutoff": "2009-05-01T00:00:00+00:00",
+  "test_end": "2009-07-01T00:00:00Z"
+}

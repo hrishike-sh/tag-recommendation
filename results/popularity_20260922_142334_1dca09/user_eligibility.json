@@ -1,0 +1,7 @@
+{
+  "all_dataset_users_in_training": 50,
+  "all_dataset_users_in_test": 50,
+  "evaluable_users_count": 50,
+  "excluded_no_test_positives": 0,
+  "min_train_interactions": 1
+}

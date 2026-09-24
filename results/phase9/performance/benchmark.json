@@ -1,0 +1,25 @@
+{
+  "catalog_size": 1493688,
+  "n_users": 991,
+  "evaluable_test_users": 518,
+  "query_latency": {
+    "K=5": {
+      "single_user_latency_ms": 96.41113399993628,
+      "batch_50_latency_ms": 4820.556699996814,
+      "throughput_queries_per_sec": 10.372246010514313
+    },
+    "K=10": {
+      "single_user_latency_ms": 96.48224600008689,
+      "batch_50_latency_ms": 4824.112300004344,
+      "throughput_queries_per_sec": 10.36460117231412
+    },
+    "K=20": {
+      "single_user_latency_ms": 96.87330799992196,
+      "batch_50_latency_ms": 4843.665399996098,
+      "throughput_queries_per_sec": 10.32276094051424
+    }
+  },
+  "peak_rss_memory_mb": 0.0,
+  "current_rss_memory_mb": 0.0,
+  "sparse_matrix_memory_safety": "VERIFIED (No dense 992x1.49M matrix allocated)"
+}

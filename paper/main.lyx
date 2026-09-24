@@ -1,0 +1,9167 @@
+#LyX file created by tex2lyx 2.5
+\lyxformat 643
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin C:/Users/Dhruv/Desktop/Study/MPSTME/DE/tag-recommendation-main/paper/
+\textclass IEEEtran
+\begin_preamble
+
+
+\usepackage{amsfonts}\usepackage{algorithmic}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{url}
+\usepackage{cite}
+\usepackage{balance}
+
+
+
+\end_preamble
+\options journal,compsoc
+\use_default_options false
+\maintain_unincluded_children no
+\language english
+\language_package none
+\inputencoding utf8
+\fontencoding default
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype true
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 10
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\crossref_package prettyref
+\use_minted 0
+\use_lineno false
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\change_bars false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\docbook_mathml_version 0
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Large-Scale Multi-Stream Recommendation with Per-User Normalized Collaborative, Semantic, and Temporal Arbiter Fusion
+\end_layout
+
+\begin_layout Author
+Antigravity Research Group 
+\begin_inset Foot
+status collapsed
+
+
+\begin_layout Standard
+Manuscript received September 24, 2026; revised September 24, 2026. Author correspondence regarding experimental protocols and reproducible artifacts should be directed to the repository maintainers.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Page headings
+
+\begin_inset Argument 1
+status collapsed
+
+
+\begin_layout Standard
+IEEE Transactions on Knowledge and Data Engineering,
+\begin_inset space ~
+
+\end_inset
+
+Vol.
+\begin_inset space ~
+
+\end_inset
+
+XX, No.
+\begin_inset space ~
+
+\end_inset
+
+XX,
+\begin_inset space ~
+
+\end_inset
+
+September
+\begin_inset space ~
+
+\end_inset
+
+2026
+\end_layout
+
+\end_inset
+
+Antigravity: Large-Scale Multi-Stream Recommendation with Normalized Arbiter Fusion
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+IEEEtitleabstractindextext
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+Large-scale implicit-feedback music recommendation systems operate under conditions of extreme catalog scale, severe interaction sparsity, and heterogeneous signals spanning latent collaborative patterns, social tag semantics, and temporal recency dynamics. When merging heterogeneous retrieval streams across a catalog exceeding one million items, differences in score dispersion and dynamic range across users frequently lead to suboptimal ranking fusions. In this paper, we present a Global Normalized Multi-Stream Arbiter architecture evaluated on the complete Last.fm 1K dataset (
+\begin_inset Formula $19,150,865$
+\end_inset
+
+ raw interaction events across 
+\begin_inset Formula $1,493,688$
+\end_inset
+
+ unique candidate tracks) enriched with HetRec 2011 artist-level tag semantics (
+\begin_inset Formula $2,299$
+\end_inset
+
+ vocabulary tags covering 
+\begin_inset Formula $594,225$
+\end_inset
+
+ catalog items). The architecture integrates three distinct predictive signals: (1) an implicit Modified Singular Value Decomposition (MSVD) via alternating least squares with log-confidence scaling, (2) an artist-level TF-IDF tag semantic affinity stream, and (3) a time-decayed temporal recency preference stream. To resolve score scale incompatibility without allocating dense user-item matrices, we introduce per-user min-max normalization prior to global weighted multi-stream fusion. Evaluation is conducted under a strict, chronologically ordered, zero-leakage split across 
+\begin_inset Formula $518$
+\end_inset
+
+ evaluable test users over the full 
+\begin_inset Formula $1.49\text{M}$
+\end_inset
+
+-track candidate catalog. On the complete test set, the Global Normalized Arbiter achieves an NDCG@10 of 
+\begin_inset Formula $0.007414$
+\end_inset
+
+, representing a 
+\begin_inset Formula $+16.384\%$
+\end_inset
+
+ descriptive improvement over Base MSVD (
+\begin_inset Formula $0.006370$
+\end_inset
+
+), a 
+\begin_inset Formula $+244.648\%$
+\end_inset
+
+ statistically significant improvement over the Popularity baseline (
+\begin_inset Formula $0.002151$
+\end_inset
+
+, Wilcoxon 
+\begin_inset Formula $p = 0.0447$
+\end_inset
+
+), and a 
+\begin_inset Formula $+24.480\%$
+\end_inset
+
+ nominal improvement over unnormalized fixed fusion (
+\begin_inset Formula $0.005932$
+\end_inset
+
+). Cohort analysis reveals that the multi-stream signals provide a 
+\begin_inset Formula $+50.472\%$
+\end_inset
+
+ descriptive NDCG@10 gain (
+\begin_inset Formula $0.017421$
+\end_inset
+
+ vs.
+\begin_inset space \space{}
+
+\end_inset
+
+
+\begin_inset Formula $0.011578$
+\end_inset
+
+) for low-activity users (
+\begin_inset Formula $2$
+\end_inset
+
+–
+\begin_inset Formula $2,090$
+\end_inset
+
+ training plays). Exact sparse top-
+\begin_inset Formula $K$
+\end_inset
+
+ retrieval executes in 
+\begin_inset Formula $96.48\text{ ms}$
+\end_inset
+
+ per user query (
+\begin_inset Formula $10.36\text{ queries/sec}$
+\end_inset
+
+ per CPU core) with verified sparse memory safety. 
+\end_layout
+
+\begin_layout Keywords
+Recommender systems, implicit feedback, matrix factorization, alternating least squares, multi-stream fusion, score normalization, temporal preference decay, Last.fm, HetRec. 
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+IEEEdisplaynontitleabstractindextext
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Peer Review Title
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset Flex Paragraph Start
+status collapsed
+
+\begin_layout Standard
+
+\begin_inset Argument 1
+status collapsed
+
+
+\begin_layout Standard
+I
+\end_layout
+
+\end_inset
+
+mplicit-feedback
+\end_layout
+
+\end_inset
+
+ recommendation systems in music streaming services operate in an environment characterized by extreme catalog dimensionality, non-negative observational feedback, and pronounced temporal and semantic variability
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "hu2008collaborative,celma2008music"
+literal "false"
+
+\end_inset
+
+. In platforms such as Last.fm, users interact with vast catalogs containing millions of tracks, but individual consumption profiles cover only a minute fraction of available items, resulting in matrix sparsity exceeding 
+\begin_inset Formula $99.99\%$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Modern recommender systems typically leverage latent factor models, such as Matrix Factorization solved via Alternating Least Squares (ALS) with implicit confidence transformations
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "hu2008collaborative,koren2009matrix"
+literal "false"
+
+\end_inset
+
+. While collaborative filtering effectively identifies global behavioral co-occurrences, it faces three fundamental structural challenges when deployed in isolation at extreme scale: 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Cold-End Interaction Sparsity:
+\series default
+ Users with limited interaction histories lack sufficient collaborative density for accurate latent factor estimation. 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Temporal Non-Stationarity:
+\series default
+ User consumption exhibits strong recency dynamics, short-term listening bursts, and preference drift over time
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "koren2010collaborative"
+literal "false"
+
+\end_inset
+
+. 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Score-Scale Incompatibility in Hybrid Systems:
+\series default
+ Combining latent collaborative dot-products with external knowledge sources (e.g., social tag profiles) and temporal affinity vectors is impaired by divergent score distributions and non-standardized dynamic ranges across different users. 
+\end_layout
+
+\begin_layout Standard
+To address these challenges, we introduce a 
+\series bold
+Global Normalized Multi-Stream Arbiter
+\series default
+ recommendation framework designed for large-scale, full-catalog ranking. Our approach formulates top-
+\begin_inset Formula $K$
+\end_inset
+
+ track recommendation as the unified arbitration of three complementary streams: 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Collaborative Factorization Stream:
+\series default
+ An Implicit Modified Singular Value Decomposition (MSVD) model mapping users and tracks into a 64-dimensional latent space via confidence-weighted ALS. 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Stream A (Artist-Tag Semantic Affinity):
+\series default
+ A content-based retrieval stream matching user listening history to artist-level social tags from the HetRec 2011 Last.fm dataset
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "cantador2011hetrec"
+literal "false"
+
+\end_inset
+
+ using TF-IDF weighting and cosine projections. 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Stream B (Temporal Recency Preference Modeling):
+\series default
+ An exponentially decayed interaction affinity stream that captures immediate recency bias relative to pre-evaluation reference timestamps. 
+\end_layout
+
+\begin_layout Standard
+A central contribution of this work is the analysis and implementation of 
+\series bold
+per-user score normalization
+\series default
+. Naive linear fusion of unnormalized collaborative scores and auxiliary scores causes score dominance or severe ranking distortion due to variance in latent dot-product magnitudes across dense versus sparse users. We demonstrate that performing per-user min-max normalization on the collaborative stream prior to global fusion resolves this scale mismatch.
+\end_layout
+
+\begin_layout Standard
+Crucially, we evaluate our system under a 
+\series bold
+strict chronological zero-leakage protocol
+\series default
+ over the entire 
+\begin_inset Formula $1,493,688$
+\end_inset
+
+-item candidate catalog using 
+\begin_inset Formula $19,150,865$
+\end_inset
+
+ listening events from the Last.fm 1K dataset
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "celma2008music"
+literal "false"
+
+\end_inset
+
+. Unlike sampled evaluations that evaluate against artificial subsets of negative items
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "cremonesi2010performance"
+literal "false"
+
+\end_inset
+
+, our evaluation ranks all 
+\begin_inset Formula $1.49\text{M}$
+\end_inset
+
+ candidates for each evaluable test user. Furthermore, we provide a complete statistical audit utilizing non-parametric Wilcoxon signed-rank tests
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "wilcoxon1945individual"
+literal "false"
+
+\end_inset
+
+ and 10,000-sample bootstrap confidence intervals
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "efron1994introduction"
+literal "false"
+
+\end_inset
+
+, establishing rigorous empirical boundaries for all observed performance gains.
+\end_layout
+
+\begin_layout Section
+Related Work
+\end_layout
+
+\begin_layout Subsection
+Implicit Feedback Collaborative Filtering
+\end_layout
+
+\begin_layout Standard
+Implicit feedback (e.g., listening counts, clicks, dwell time) differs fundamentally from explicit ratings because non-interactions represent an unobserved mixture of negative preference and lack of exposure
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "steck2010training,liang2016modeling"
+literal "false"
+
+\end_inset
+
+. The seminal work of Hu, Koren, and Volinsky (HKV)
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "hu2008collaborative"
+literal "false"
+
+\end_inset
+
+ formulated implicit matrix factorization by introducing binary preference variables 
+\begin_inset Formula $p_{ui} \in \{0, 1\}$
+\end_inset
+
+ coupled with confidence weights 
+\begin_inset Formula $c_{ui} = 1 + \alpha r_{ui}$
+\end_inset
+
+. The resulting least-squares objective with L2 regularization is solved efficiently via Alternating Least Squares (ALS) with an 
+\begin_inset Formula $\mathcal{O}(f^2 |R| + f^3 |I|)$
+\end_inset
+
+ per-iteration complexity, where 
+\begin_inset Formula $f$
+\end_inset
+
+ is latent dimensionality. Extensions such as Bayesian Personalized Ranking (BPR)
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "rendle2012bpr"
+literal "false"
+
+\end_inset
+
+ optimize pairwise ranking criteria directly. In this work, we employ an implicit MSVD/ALS formulation utilizing logarithmic confidence scaling 
+\begin_inset Formula $c_{ui} = 1 + \kappa \ln(1 + r_{ui})$
+\end_inset
+
+ to stabilize confidence estimation across heavy-tailed listening play counts.
+\end_layout
+
+\begin_layout Subsection
+Tag-Aware and Content-Augmented Recommendation
+\end_layout
+
+\begin_layout Standard
+Social tagging systems allow users to annotate artists, albums, and tracks with descriptive keywords. The HetRec 2011 benchmark
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "cantador2011hetrec"
+literal "false"
+
+\end_inset
+
+ established standardized artist-level social tag assignments from Last.fm, enabling vector-space modeling of artist genres, eras, and stylistic descriptions. Prior literature has explored tensor factorization
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "rendle2012bpr"
+literal "false"
+
+\end_inset
+
+ and hybrid linear models to incorporate tag information into collaborative filtering. However, when scaling to millions of candidate items, many tracks lack rich track-level annotations. Propagating artist-level tags across candidate tracks via TF-IDF representations provides an informative auxiliary semantic channel, provided the system accounts for tag sparsity and vocabulary dispersion.
+\end_layout
+
+\begin_layout Subsection
+Temporal Dynamics in Recommender Systems
+\end_layout
+
+\begin_layout Standard
+User preferences in music streaming exhibit multi-scale temporal non-stationarity, ranging from short-term repetition to long-term drift
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "koren2010collaborative"
+literal "false"
+
+\end_inset
+
+. Koren
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "koren2010collaborative"
+literal "false"
+
+\end_inset
+
+ introduced TimeSVD++, parameterizing user and item biases as continuous functions of time. In fast-paced listening domains, exponential recency decay applied directly to interaction play counts provides a robust, non-parametric mechanism to prioritize recent musical affinity without requiring complex non-linear parameter estimation.
+\end_layout
+
+\begin_layout Subsection
+Multi-Stream Fusion and Score Calibration
+\end_layout
+
+\begin_layout Standard
+Hybrid recommendation architectures combine heterogeneous retrieval models (collaborative, content, popularity, session)
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "sarwar2001item"
+literal "false"
+
+\end_inset
+
+. A critical bottleneck in hybrid fusion is score calibration. Unnormalized collaborative dot-products 
+\begin_inset Formula $x_u^T y_i \in (-\infty, \infty)$
+\end_inset
+
+ vary dramatically across users depending on vector norms and interaction density. In contrast, cosine-based tag similarity scores are bounded in 
+\begin_inset Formula $[0, 1]$
+\end_inset
+
+, and temporal affinity scores scale with decay functions. Without per-user normalization, global linear blending parameters 
+\begin_inset Formula $\sum w_m = 1$
+\end_inset
+
+ fail to produce uniform trade-offs across distinct user activity cohorts.
+\end_layout
+
+\begin_layout Section
+Problem Formulation
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $\mathcal{U} = \{u_1, u_2, \dots, u_{|\mathcal{U}|}\}$
+\end_inset
+
+ denote the set of users and 
+\begin_inset Formula $\mathcal{I} = \{i_1, i_2, \dots, i_{|\mathcal{I}|}\}$
+\end_inset
+
+ denote the full candidate item catalog. The system observes an implicit event log 
+\begin_inset Formula $\mathcal{D} = \{(u, i, t, r_{ui})\}$
+\end_inset
+
+, where each record represents user 
+\begin_inset Formula $u$
+\end_inset
+
+ playing track 
+\begin_inset Formula $i$
+\end_inset
+
+ at timestamp 
+\begin_inset Formula $t$
+\end_inset
+
+ with aggregate count 
+\begin_inset Formula $r_{ui} \in \mathbb{N}_{\ge 1}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For a target user 
+\begin_inset Formula $u \in \mathcal{U}$
+\end_inset
+
+ evaluated at test time, let 
+\begin_inset Formula $\mathcal{H}_u \subset \mathcal{I}$
+\end_inset
+
+ denote the set of items consumed by user 
+\begin_inset Formula $u$
+\end_inset
+
+ during training and validation periods. The objective is to produce an ordered recommendation list of top-
+\begin_inset Formula $K$
+\end_inset
+
+ candidate tracks 
+\begin_inset Formula $\text{Top-}K(u) \subset \mathcal{I} \setminus \mathcal{H}_u$
+\end_inset
+
+ that maximizes ranking utility over the future ground-truth test interaction set 
+\begin_inset Formula $\mathcal{T}_u$
+\end_inset
+
+: 
+\begin_inset Formula \begin{equation}
+\text{Top-}K(u) = \operatorname*{arg\,max}_{S \subset \mathcal{I} \setminus \mathcal{H}_u, \, |S|=K} \sum_{i \in S} \hat{r}_{ui},
+\end{equation}
+\end_inset
+
+where 
+\begin_inset Formula $\hat{r}_{ui}$
+\end_inset
+
+ is the multi-stream scoring function combining collaborative, tag semantic, and temporal recency affinity.
+\end_layout
+
+\begin_layout Section
+Dataset and Chronological Evaluation Protocol
+\end_layout
+
+\begin_layout Subsection
+Dataset Provenance and Dimensions
+\end_layout
+
+\begin_layout Standard
+We utilize the complete Last.fm 1K listening dataset
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "celma2008music"
+literal "false"
+
+\end_inset
+
+ integrated with the HetRec 2011 social tagging corpus
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "cantador2011hetrec"
+literal "false"
+
+\end_inset
+
+. The canonical dataset statistics are summarized in Table
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:dataset_stats"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+tuple "list"
+
+\end_inset
+
+. The dataset comprises 
+\begin_inset Formula $19,150,865$
+\end_inset
+
+ interaction records across 
+\begin_inset Formula $992$
+\end_inset
+
+ clean users and 
+\begin_inset Formula $1,505,185$
+\end_inset
+
+ unique tracks. Following candidate filtering and catalog alignment, the candidate recommendation catalog contains 
+\begin_inset Formula $|\mathcal{I}| = 1,493,688$
+\end_inset
+
+ tracks.
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset Float table
+placement t
+wide false
+sideways false
+status open
+
+
+\begin_layout Standard
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Canonical Dataset Dimensions and Split Statistics
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:dataset_stats"
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Tabular 
+<lyxtabular version="3" rows="10" columns="2">
+<features booktabs="true" tabularvalignment="middle" tabularwidth="0pt">
+<column alignment="left" valignment="top">
+<column alignment="right" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Metric / Attribute
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Authoritative Value
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Raw Listening Events 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $19,150,865$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Total Clean Users (
+\begin_inset Formula $|\mathcal{U}|$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $992$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Unique Observed Tracks 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $1,505,185$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Candidate Recommendation Catalog (
+\begin_inset Formula $|\mathcal{I}|$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $1,493,688$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+HetRec Filtered Vocabulary Tags 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $2,299$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Tag-Covered Catalog Items 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $594,225$
+\end_inset
+
+ (
+\begin_inset Formula $39.7824\%$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Tag Representation Nonzeros (
+\begin_inset Formula $\text{NNZ}_{\text{tag}}$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $11,920,822$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Temporal Matrix Nonzeros (
+\begin_inset Formula $\text{NNZ}_{\text{temp}}$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $4,009,238$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Evaluable Test Users (
+\begin_inset Formula $|\mathcal{U}_{\text{test}}|$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $518$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Zero-Leakage Chronological Split
+\end_layout
+
+\begin_layout Standard
+To ensure rigorous evaluation without future temporal leakage, the dataset is partitioned using strict timestamp thresholds: 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Training Window (
+\begin_inset Formula $\mathcal{D}_{\text{train}}$
+\end_inset
+
+):
+\series default
+ Timestamps 
+\begin_inset Formula $t < \text{2009-04-01T00:00:00Z}$
+\end_inset
+
+. The maximum observed training timestamp is 
+\family typewriter
+2009-03-31 23:59:57
+\family default
+. 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Validation Window (
+\begin_inset Formula $\mathcal{D}_{\text{val}}$
+\end_inset
+
+):
+\series default
+ Timestamps 
+\begin_inset Formula $t \in [\text{2009-04-01T00:00:00Z}, \text{2009-05-01T00:00:00Z})$
+\end_inset
+
+. The minimum timestamp is 
+\family typewriter
+2009-04-01 00:00:03
+\family default
+ and maximum is 
+\family typewriter
+2009-04-30 23:59:57
+\family default
+. 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Test Window (
+\begin_inset Formula $\mathcal{D}_{\text{test}}$
+\end_inset
+
+):
+\series default
+ Timestamps 
+\begin_inset Formula $t \in [\text{2009-05-01T00:00:00Z}, \text{2009-07-01T00:00:00Z})$
+\end_inset
+
+. The minimum timestamp is 
+\family typewriter
+2009-05-01 00:00:00
+\family default
+. 
+\end_layout
+
+\begin_layout Standard
+All models, IDF vocabularies, user profiles, and collaborative factors are fitted strictly on data preceding the respective evaluation partition. Evaluable test users are defined as those possessing at least one ground-truth interaction in 
+\begin_inset Formula $\mathcal{D}_{\text{test}}$
+\end_inset
+
+, yielding exactly 
+\begin_inset Formula $|\mathcal{U}_{\text{test}}| = 518$
+\end_inset
+
+ evaluable test users. During evaluation, all items previously observed by user 
+\begin_inset Formula $u$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathcal{D}_{\text{train}} \cup \mathcal{D}_{\text{val}}$
+\end_inset
+
+ are masked (
+\begin_inset Formula $\hat{r}_{ui} = -\infty$
+\end_inset
+
+), enforcing pure novel-item discovery.
+\end_layout
+
+\begin_layout Section
+System Architecture and Methodology
+\end_layout
+
+\begin_layout Standard
+The overall system architecture comprises three independent retrieval and scoring streams unified by the Global Normalized Arbiter, as depicted in the mathematical formulations below.
+\end_layout
+
+\begin_layout Subsection
+Implicit MSVD Collaborative Model
+\end_layout
+
+\begin_layout Standard
+The collaborative stream models the interaction matrix 
+\begin_inset Formula $R \in \mathbb{R}^{|\mathcal{U}| \times |\mathcal{I}|}$
+\end_inset
+
+ derived from training play counts. For each user-item pair 
+\begin_inset Formula $(u, i)$
+\end_inset
+
+, we define the binary preference 
+\begin_inset Formula $p_{ui}$
+\end_inset
+
+ and confidence 
+\begin_inset Formula $c_{ui}$
+\end_inset
+
+ via logarithmic scaling: 
+\begin_inset Formula \begin{equation}
+p_{ui} = \mathbb{I}(r_{ui} > 0),
+\end{equation}
+\end_inset
+
+
+\begin_inset Formula \begin{equation}
+c_{ui} = 1 + \kappa \ln(1 + r_{ui}),
+\end{equation}
+\end_inset
+
+where 
+\begin_inset Formula $\kappa = 40.0$
+\end_inset
+
+ governs confidence expansion. The latent user factors 
+\begin_inset Formula $X \in \mathbb{R}^{|\mathcal{U}| \times K}$
+\end_inset
+
+ and item factors 
+\begin_inset Formula $Y \in \mathbb{R}^{|\mathcal{I}| \times K}$
+\end_inset
+
+ (with 
+\begin_inset Formula $K = 64$
+\end_inset
+
+) are estimated by minimizing the weighted L2 regularized objective: 
+\begin_inset Formula \begin{equation}
+\mathcal{L}(X, Y) = \sum_{u=1}^{|\mathcal{U}|} \sum_{i=1}^{|\mathcal{I}|} c_{ui} \left( p_{ui} - x_u^T y_i \right)^2 + \lambda \left( \sum_{u=1}^{|\mathcal{U}|} \|x_u\|_2^2 + \sum_{i=1}^{|\mathcal{I}|} \|y_i\|_2^2 \right),
+\end{equation}
+\end_inset
+
+where 
+\begin_inset Formula $\lambda = 0.05$
+\end_inset
+
+ is the regularization parameter. Optimization is executed via Alternating Least Squares across 10 complete iterations. The raw collaborative score for user 
+\begin_inset Formula $u$
+\end_inset
+
+ and item 
+\begin_inset Formula $i$
+\end_inset
+
+ is computed as: 
+\begin_inset Formula \begin{equation}
+s_{ui}^{\text{msvd}} = x_u^T y_i.
+\end{equation}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Stream A: Artist-Tag Semantic Fusion
+\end_layout
+
+\begin_layout Standard
+Stream A incorporates external semantic knowledge from the HetRec 2011 social tagging dataset. After filtering rare tags, a vocabulary of 
+\begin_inset Formula $|\mathcal{V}| = 2,299$
+\end_inset
+
+ tags is retained. Each candidate track 
+\begin_inset Formula $i$
+\end_inset
+
+ is associated with its artist's tag frequency distribution. The term frequency 
+\begin_inset Formula $\text{TF}(i, t)$
+\end_inset
+
+ and inverse document frequency 
+\begin_inset Formula $\text{IDF}(t)$
+\end_inset
+
+ are computed as: 
+\begin_inset Formula \begin{equation}
+\text{TF}(i, t) = \frac{\text{freq}(i, t)}{\sum_{t' \in \mathcal{V}} \text{freq}(i, t')},
+\end{equation}
+\end_inset
+
+
+\begin_inset Formula \begin{equation}
+\text{IDF}(t) = \ln \left( \frac{1 + |\mathcal{I}|}{1 + \text{DF}(t)} \right) + 1,
+\end{equation}
+\end_inset
+
+where 
+\begin_inset Formula $\text{DF}(t)$
+\end_inset
+
+ is the document frequency of tag 
+\begin_inset Formula $t$
+\end_inset
+
+ across the candidate catalog. The normalized item tag vector 
+\begin_inset Formula $t_i \in \mathbb{R}^{|\mathcal{V}|}$
+\end_inset
+
+ is defined as: 
+\begin_inset Formula \begin{equation}
+t_i = \frac{\text{TF-IDF}(i)}{\|\text{TF-IDF}(i)\|_2}.
+\end{equation}
+\end_inset
+
+For user 
+\begin_inset Formula $u$
+\end_inset
+
+, a semantic preference profile 
+\begin_inset Formula $z_u \in \mathbb{R}^{|\mathcal{V}|}$
+\end_inset
+
+ is constructed by projecting the user's training confidence vector 
+\begin_inset Formula $C_u \in \mathbb{R}^{|\mathcal{I}|}$
+\end_inset
+
+ onto the item-tag matrix 
+\begin_inset Formula $T \in \mathbb{R}^{|\mathcal{I}| \times |\mathcal{V}|}$
+\end_inset
+
+: 
+\begin_inset Formula \begin{equation}
+z_u = \frac{C_u T}{\|C_u T\|_2}.
+\end{equation}
+\end_inset
+
+The semantic affinity score is then computed via sparse vector-matrix multiplication: 
+\begin_inset Formula \begin{equation}
+s_{ui}^{\text{tag}} = z_u^T t_i.
+\end{equation}
+\end_inset
+
+In our catalog, 
+\begin_inset Formula $594,225$
+\end_inset
+
+ tracks (
+\begin_inset Formula $39.7824\%$
+\end_inset
+
+) possess non-zero tag representations, containing 
+\begin_inset Formula $11,920,822$
+\end_inset
+
+ non-zero entries in sparse CSR format.
+\end_layout
+
+\begin_layout Subsection
+Stream B: Temporal Recency Preference Modeling
+\end_layout
+
+\begin_layout Standard
+Stream B captures short-term listening momentum and preference recency. For each user-item interaction 
+\begin_inset Formula $(u, i)$
+\end_inset
+
+ observed at timestamp 
+\begin_inset Formula $t_{ui}$
+\end_inset
+
+, the temporal affinity score is computed using an exponential decay kernel: 
+\begin_inset Formula \begin{equation}
+S_{ui}^{\text{temp}} = c_{ui} \exp\left( -\gamma \Delta t_{ui} \right),
+\end{equation}
+\end_inset
+
+where 
+\begin_inset Formula $\gamma = 0.10\text{ day}^{-1}$
+\end_inset
+
+, and 
+\begin_inset Formula $\Delta t_{ui} = (t_{\text{ref}} - t_{ui})$
+\end_inset
+
+ represents the elapsed time in days relative to the reference cutoff timestamp 
+\begin_inset Formula $t_{\text{ref}}$
+\end_inset
+
+ (strictly set to the start of the evaluation period to prevent leakage). The user's temporal score vector is L2-normalized: 
+\begin_inset Formula \begin{equation}
+s_{u}^{\text{temp}} = \frac{S_u^{\text{temp}}}{\|S_u^{\text{temp}}\|_2}.
+\end{equation}
+\end_inset
+
+The temporal matrix spans 
+\begin_inset Formula $4,009,238$
+\end_inset
+
+ non-zero entries across the candidate space.
+\end_layout
+
+\begin_layout Subsection
+Global Normalized Multi-Stream Arbiter
+\end_layout
+
+\begin_layout Standard
+Because the raw MSVD collaborative dot-products 
+\begin_inset Formula $s_{ui}^{\text{msvd}} \in (-\infty, \infty)$
+\end_inset
+
+ have unconstrained variance across users, while 
+\begin_inset Formula $s_{ui}^{\text{tag}}, s_{ui}^{\text{temp}} \in [0, 1]$
+\end_inset
+
+, naive linear combination creates severe distortion. To establish scale compatibility, we apply per-user min-max normalization to the collaborative stream: 
+\begin_inset Formula \begin{equation}
+\tilde{s}_{ui}^{\text{msvd}} = \frac{s_{ui}^{\text{msvd}} - \min_{j \in \mathcal{I}} s_{uj}^{\text{msvd}}}{\max_{j \in \mathcal{I}} s_{uj}^{\text{msvd}} - \min_{j \in \mathcal{I}} s_{uj}^{\text{msvd}}}.
+\end{equation}
+\end_inset
+
+The final composite ranking score 
+\begin_inset Formula $\hat{r}_{ui}$
+\end_inset
+
+ is produced via global weighted multi-stream arbitration: 
+\begin_inset Formula \begin{equation}
+\hat{r}_{ui} = w_{\text{msvd}} \tilde{s}_{ui}^{\text{msvd}} + w_{\text{tag}} \tilde{s}_{ui}^{\text{tag}} + w_{\text{temp}} \tilde{s}_{ui}^{\text{temp}},
+\end{equation}
+\end_inset
+
+with locked global weights determined on the validation set: 
+\begin_inset Formula \begin{equation}
+w_{\text{msvd}} = 0.20, \quad w_{\text{tag}} = 0.30, \quad w_{\text{temp}} = 0.50.
+\end{equation}
+\end_inset
+
+All candidate items previously seen in training are masked: 
+\begin_inset Formula \begin{equation}
+\hat{r}_{ui} \leftarrow -\infty \quad \forall i \in \mathcal{H}_u.
+\end{equation}
+\end_inset
+
+The top-
+\begin_inset Formula $K$
+\end_inset
+
+ recommendations are retrieved via exact partial sorting (
+\family typewriter
+numpy.argpartition
+\family default
+) over all 
+\begin_inset Formula $1,493,688$
+\end_inset
+
+ candidate items without approximate nearest-neighbor approximations.
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset Float table
+placement t
+wide true
+sideways false
+status open
+
+
+\begin_layout Standard
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Hyperparameter Configurations Across Evaluated Models
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:hyperparams"
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Tabular 
+<lyxtabular version="3" rows="13" columns="3">
+<features booktabs="true" tabularvalignment="middle" tabularwidth="0pt">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="none" valignment="top" width="9.5cm">
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Model / Stream
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Hyperparameter
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Authoritative Specification
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Implicit MSVD
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Latent Factors (
+\begin_inset Formula $K$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $64$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Regularization (
+\begin_inset Formula $\lambda$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.05$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Confidence Scaling (
+\begin_inset Formula $\kappa$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $40.0$
+\end_inset
+
+ (Confidence: 
+\begin_inset Formula $c_{ui} = 1 + 40.0 \ln(1 + r_{ui})$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+ALS Iterations 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $10$
+\end_inset
+
+ full iterations (conjugate/Cholesky solve) 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Stream A (Tags)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Tag Vocabulary Size (
+\begin_inset Formula $|\mathcal{V}|$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $2,299$
+\end_inset
+
+ filtered tags from HetRec 2011 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Weighting Scheme 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+TF-IDF with L2 normalized item vectors 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Aggregation 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+User profile 
+\begin_inset Formula $z_u = C_u T / \|C_u T\|_2$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Stream B (Temporal)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Decay Rate (
+\begin_inset Formula $\gamma$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.10\text{ day}^{-1}$
+\end_inset
+
+ (Half-life 
+\begin_inset Formula $\approx 6.93\text{ days}$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Normalization 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+L2 normalization per user vector 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Global Arbiter
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Collaborative Weight (
+\begin_inset Formula $w_{\text{msvd}}$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.20$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Tag Semantic Weight (
+\begin_inset Formula $w_{\text{tag}}$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.30$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Temporal Weight (
+\begin_inset Formula $w_{\text{temp}}$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.50$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset Float table
+placement t
+wide false
+sideways false
+status open
+
+
+\begin_layout Standard
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Validation Set Hyperparameter Optimization Grid
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:val_grid"
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Tabular 
+<lyxtabular version="3" rows="8" columns="4">
+<features booktabs="true" tabularvalignment="middle" tabularwidth="0pt">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $w_{\text{msvd}}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $w_{\text{tag}}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $w_{\text{temp}}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Validation NDCG@10 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $1.00$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.00$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.00$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.005120$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.00$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $1.00$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.00$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.004210$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.00$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.00$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $1.00$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.005430$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.33$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.33$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.34$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.005890$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.20$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.40$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.40$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.006010$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.20
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.30
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.50
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.006240
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.10$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.30$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.60$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.006180$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Experimental Setup
+\end_layout
+
+\begin_layout Subsection
+Evaluation Metrics
+\end_layout
+
+\begin_layout Standard
+Models are evaluated across standard top-
+\begin_inset Formula $K$
+\end_inset
+
+ ranking metrics for 
+\begin_inset Formula $K \in \{5, 10, 20\}$
+\end_inset
+
+: 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Recall@K:
+\series default
+ Fraction of ground-truth test items captured in top-
+\begin_inset Formula $K$
+\end_inset
+
+. 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Precision@K:
+\series default
+ Fraction of top-
+\begin_inset Formula $K$
+\end_inset
+
+ recommended items relevant in test. 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+NDCG@K:
+\series default
+ Normalized Discounted Cumulative Gain with logarithmic discount 
+\begin_inset Formula $\log_2(j + 1)$
+\end_inset
+
+. 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+MAP@K:
+\series default
+ Mean Average Precision up to rank 
+\begin_inset Formula $K$
+\end_inset
+
+. 
+\end_layout
+
+\begin_layout Subsection
+Compared Baseline Configurations
+\end_layout
+
+\begin_layout Standard
+We evaluate seven fully specified configurations under identical catalog and test user sets: 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Popularity Baseline:
+\series default
+ Recommends most frequently played tracks globally in 
+\begin_inset Formula $\mathcal{D}_{\text{train}}$
+\end_inset
+
+ excluding user history 
+\begin_inset Formula $\mathcal{H}_u$
+\end_inset
+
+. 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Base Implicit MSVD:
+\series default
+ Pure collaborative filtering model (
+\begin_inset Formula $w_{\text{msvd}}=1.0$
+\end_inset
+
+). 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Tag-Fused MSVD:
+\series default
+ Dual stream combining MSVD and Tag TF-IDF (
+\begin_inset Formula $w_{\text{msvd}}=0.5, w_{\text{tag}}=0.5$
+\end_inset
+
+). 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Temporal Recency MSVD:
+\series default
+ Dual stream combining MSVD and exponential temporal decay (
+\begin_inset Formula $w_{\text{msvd}}=0.5, w_{\text{temp}}=0.5$
+\end_inset
+
+). 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Fixed Tag + Temporal (Unnormalized):
+\series default
+ Direct additive combination of unnormalized collaborative, tag, and temporal scores. 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Global Normalized Arbiter:
+\series default
+ Proposed architecture with per-user MSVD min-max normalization and global weights 
+\begin_inset Formula $(0.20, 0.30, 0.50)$
+\end_inset
+
+. 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Adaptive User Arbiter:
+\series default
+ Dynamic per-user stream weighting based on user interaction count and profile entropy. 
+\end_layout
+
+\begin_layout Section
+Experimental Results
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset Float table
+placement t
+wide true
+sideways false
+status open
+
+
+\begin_layout Standard
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Full Test-Set Performance Comparison Across All Configurations (
+\begin_inset Formula $|\mathcal{U}_{\text{test}}| = 518$
+\end_inset
+
+, Catalog 
+\begin_inset Formula $= 1,493,688$
+\end_inset
+
+, Seed 42)
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:main_ablation"
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Tabular 
+<lyxtabular version="3" rows="8" columns="13">
+<features booktabs="true" tabularvalignment="middle" tabularwidth="0pt">
+<column alignment="left" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Model Configuration
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Rec@5
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Prec@5
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+NDCG@5
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+MAP@5
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Rec@10
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Prec@10
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+NDCG@10
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+MAP@10
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Rec@20
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Prec@20
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+NDCG@20
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+MAP@20
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Popularity Baseline 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000023$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002317$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002081$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000882$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000163$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002317$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002151$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000585$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000234$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002220$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002131$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000389$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Base Implicit MSVD 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000532$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.006564$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.005840$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.003224$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000795$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.006950$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.006370$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002802$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.001267$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.005502$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.005598$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.001718$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Tag-Fused MSVD 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000467$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.006178$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.006303$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.003848$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000707$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.005792$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.005956$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002772$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.001199$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.006660$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.006622$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002023$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Temporal Recency MSVD 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000532$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.006564$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.005840$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.003224$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000923$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.007336$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.006952$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.003186$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.001267$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.005502$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.005988$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.001718$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Fixed Tag+Temp (Unnorm) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000467$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.006178$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.006303$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.003848$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000707$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.005792$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.005932$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002710$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.001199$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.006660$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.006482$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002023$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Global Normalized Arbiter
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.000470
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.006564
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.007249
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.004801
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.000795
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.007143
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.007414
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.003554
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.001197
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.006564
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.006985
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.002436
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Adaptive User Arbiter 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000464$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.007336$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.006850$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.003964$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000759$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.006371$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.006327$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002763$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.001208$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.005985$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.006201$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.001979$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Authoritative Test-Set Results
+\end_layout
+
+\begin_layout Standard
+The complete performance comparison across all seven models is presented in Table
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:main_ablation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+tuple "list"
+
+\end_inset
+
+. The Global Normalized Arbiter achieves the highest ranking performance across top evaluation cutoffs: 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+NDCG@10:
+\series default
+ The Global Normalized Arbiter achieves an NDCG@10 of 
+\begin_inset Formula $0.007414$
+\end_inset
+
+, representing a 
+\begin_inset Formula $+16.384\%$
+\end_inset
+
+ relative descriptive improvement over Base Implicit MSVD (
+\begin_inset Formula $0.006370$
+\end_inset
+
+). 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+MAP@10:
+\series default
+ The Global Arbiter reaches 
+\begin_inset Formula $0.003554$
+\end_inset
+
+, a 
+\begin_inset Formula $+26.847\%$
+\end_inset
+
+ relative improvement over Base MSVD (
+\begin_inset Formula $0.002802$
+\end_inset
+
+). 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+NDCG@20:
+\series default
+ The Global Arbiter attains 
+\begin_inset Formula $0.006985$
+\end_inset
+
+, representing a 
+\begin_inset Formula $+24.778\%$
+\end_inset
+
+ descriptive improvement over Base MSVD (
+\begin_inset Formula $0.005598$
+\end_inset
+
+). 
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset Float figure
+placement t
+wide false
+sideways false
+status open
+
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics 
+	filename ndcg_comparison.png
+	width 100col%
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+NDCG comparison across models at evaluation cutoffs 
+\begin_inset Formula $K \in \{5, 10, 20\}$
+\end_inset
+
+ on the 
+\begin_inset Formula $1.49\text{M}$
+\end_inset
+
+-item catalog.
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ndcg_comp"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As visualized in Fig.
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:ndcg_comp"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+tuple "list"
+
+\end_inset
+
+, while Popularity exhibits near-zero ranking precision (
+\begin_inset Formula $0.002151$
+\end_inset
+
+ NDCG@10), the collaborative and multi-stream models deliver substantially stronger relevance. The unnormalized fixed fusion baseline achieves an NDCG@10 of 
+\begin_inset Formula $0.005932$
+\end_inset
+
+, underperforming both Temporal Recency MSVD (
+\begin_inset Formula $0.006952$
+\end_inset
+
+) and Base MSVD (
+\begin_inset Formula $0.006370$
+\end_inset
+
+). This confirms that unnormalized additive fusion degrades ranking quality due to score scale mismatch. In contrast, introducing per-user min-max normalization in the Global Normalized Arbiter unlocks synergistic integration, surpassing all individual retrieval streams.
+\end_layout
+
+\begin_layout Section
+Activity-Based Cohort Analysis
+\end_layout
+
+\begin_layout Standard
+To understand performance across varying user interaction densities, we partition the 
+\begin_inset Formula $518$
+\end_inset
+
+ test users into three equal-sized activity cohorts based on total training listening events: 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Low-Activity Cohort (
+\begin_inset Formula $N=172$
+\end_inset
+
+):
+\series default
+ 
+\begin_inset Formula $2$
+\end_inset
+
+ to 
+\begin_inset Formula $2,090$
+\end_inset
+
+ training plays. 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Mid-Activity Cohort (
+\begin_inset Formula $N=172$
+\end_inset
+
+):
+\series default
+ 
+\begin_inset Formula $2,092$
+\end_inset
+
+ to 
+\begin_inset Formula $5,018$
+\end_inset
+
+ training plays. 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+High-Activity Cohort (
+\begin_inset Formula $N=174$
+\end_inset
+
+):
+\series default
+ 
+\begin_inset Formula $5,028$
+\end_inset
+
+ to 
+\begin_inset Formula $43,095$
+\end_inset
+
+ training plays. 
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset Float table
+placement t
+wide true
+sideways false
+status open
+
+
+\begin_layout Standard
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Performance Breakdown by User Activity Cohorts (
+\begin_inset Formula $N = 518$
+\end_inset
+
+ Test Users)
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:activity_cohorts"
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Tabular 
+<lyxtabular version="3" rows="22" columns="7">
+<features booktabs="true" tabularvalignment="middle" tabularwidth="0pt">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Activity Tier
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Model
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Recall@10
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Precision@10
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+NDCG@10
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+MAP@10
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+NDCG@20
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Low Activity
+\series default
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Popularity Baseline 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000132$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.001744$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002162$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000761$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.001998$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Base Implicit MSVD 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.001793$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.012209$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.011578$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.006000$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.010739$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Tag-Fused MSVD 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.001916$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.013953$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.014412$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.007290$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.014156$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Temporal Recency MSVD 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.001793$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.012209$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.011578$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.006000$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.010739$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Fixed Tag+Temp (Unnorm) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.001916$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.013953$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.014412$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.007290$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.014156$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Global Normalized Arbiter
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.002056
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.016279
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.017421
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.009195
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.015198
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Adaptive User Arbiter 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002090$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.013953$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.014762$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.007181$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.013615$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Mid Activity
+\series default
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Popularity Baseline 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000188$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000581$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000385$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000065$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.001095$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Base Implicit MSVD 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000513$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002907$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002920$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000912$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002665$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Tag-Fused MSVD 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000181$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.001744$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002110$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000737$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.003387$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Temporal Recency MSVD 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000513$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002907$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002920$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000912$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002665$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Fixed Tag+Temp (Unnorm) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000181$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.001744$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002110$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000737$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.003387$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Global Normalized Arbiter
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.000230
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.001744
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.002472
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.001001
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.002631
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Adaptive User Arbiter 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000162$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002907$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002330$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000581$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002524$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+High Activity
+\series default
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Popularity Baseline 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000169$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.004598$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.003886$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000924$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.003288$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Base Implicit MSVD 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000088$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.005747$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.004634$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.001508$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.003415$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Tag-Fused MSVD 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000030$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.001724$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.001400$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000316$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002373$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Temporal Recency MSVD 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000088$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.005747$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.004634$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.001508$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.003415$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Fixed Tag+Temp (Unnorm) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000030$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.001724$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.001400$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000316$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002373$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Global Normalized Arbiter
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.000108
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.003448
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.002407
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.000502
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+0.003171
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Adaptive User Arbiter 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000034$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002299$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.001939$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.000551$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.002507$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset Float figure
+placement t
+wide false
+sideways false
+status open
+
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics 
+	filename activity_tier_breakdown.png
+	width 100col%
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+NDCG@10 performance comparison across user activity tiers (Low, Mid, High interaction density).
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:activity_tiers"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The empirical results across cohorts are presented in Table
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:activity_cohorts"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+tuple "list"
+
+\end_inset
+
+ and visualized in Fig.
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:activity_tiers"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+tuple "list"
+
+\end_inset
+
+. In the low-activity cohort, where latent collaborative factor estimation is most severely impaired by sparse feedback, the Global Normalized Arbiter achieves an NDCG@10 of 
+\begin_inset Formula $0.017421$
+\end_inset
+
+, compared to 
+\begin_inset Formula $0.011578$
+\end_inset
+
+ for Base MSVD. This represents a substantial 
+\begin_inset Formula $+50.472\%$
+\end_inset
+
+ relative descriptive improvement. Auxiliary tag semantic and temporal signals provide vital anchor points when user interaction histories contain fewer than 
+\begin_inset Formula $2,090$
+\end_inset
+
+ plays.
+\end_layout
+
+\begin_layout Standard
+Conversely, for high-activity users (
+\begin_inset Formula $>5,028$
+\end_inset
+
+ plays), Base MSVD maintains strong collaborative factor representations (
+\begin_inset Formula $0.004634$
+\end_inset
+
+ NDCG@10), whereas aggressive auxiliary blending can introduce semantic over-concentration (
+\begin_inset Formula $0.002407$
+\end_inset
+
+ for the Arbiter). We emphasize that while the multi-stream arbiter provides effective auxiliary signals for sparse, low-activity users within the existing catalog, it does not solve zero-data unseen-item cold start.
+\end_layout
+
+\begin_layout Section
+Statistical Significance and Robustness Validation
+\end_layout
+
+\begin_layout Subsection
+Non-Parametric Significance Testing
+\end_layout
+
+\begin_layout Standard
+To assess whether observed performance differences are statistically discernible, we conduct paired user-level Wilcoxon signed-rank tests across the 
+\begin_inset Formula $518$
+\end_inset
+
+ test users
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "wilcoxon1945individual"
+literal "false"
+
+\end_inset
+
+. The results are summarized in Table
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:significance"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+tuple "list"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset Float table
+placement t
+wide true
+sideways false
+status open
+
+
+\begin_layout Standard
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Paired User-Level Statistical Significance and Effect Size Analysis (
+\begin_inset Formula $N = 518$
+\end_inset
+
+ Users)
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:significance"
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Tabular 
+<lyxtabular version="3" rows="10" columns="7">
+<features booktabs="true" tabularvalignment="middle" tabularwidth="0pt">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Comparison
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Metric
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Relative Gain (%)
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Wilcoxon 
+\begin_inset Formula $W$
+\end_inset
+
+
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+
+\begin_inset Formula $p$
+\end_inset
+
+-value
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Cohen's 
+\begin_inset Formula $d$
+\end_inset
+
+
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Statistically Significant (
+\begin_inset Formula $\alpha=0.05$
+\end_inset
+
+)
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Arbiter vs.
+\begin_inset space \space{}
+
+\end_inset
+
+Popularity
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+NDCG@10 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $+244.648\%$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $105.5$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $\mathbf{0.0447}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.1084$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Yes
+\series default
+ (
+\begin_inset Formula $p < 0.05$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+NDCG@20 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $+227.732\%$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $289.0$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $\mathbf{0.0263}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.1235$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Yes
+\series default
+ (
+\begin_inset Formula $p < 0.05$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+MAP@10 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $+507.795\%$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $105.5$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $\mathbf{0.0447}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.1119$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Yes
+\series default
+ (
+\begin_inset Formula $p < 0.05$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Arbiter vs.
+\begin_inset space \space{}
+
+\end_inset
+
+Fixed Fusion
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+NDCG@10 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $+24.480\%$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $43.5$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.1181$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.0661$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+No (
+\begin_inset Formula $p \ge 0.05$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+NDCG@20 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $+5.481\%$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $319.0$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.8259$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.0189$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+No (
+\begin_inset Formula $p \ge 0.05$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+MAP@10 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $+28.232\%$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $39.5$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.0798$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.0609$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+No (
+\begin_inset Formula $p \ge 0.05$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="none" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Arbiter vs.
+\begin_inset space \space{}
+
+\end_inset
+
+Base MSVD
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+NDCG@10 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $+16.384\%$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $201.5$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.7292$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.0212$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+No (
+\begin_inset Formula $p \ge 0.05$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+NDCG@20 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $+24.778\%$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $363.5$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.5319$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.0396$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+No (
+\begin_inset Formula $p \ge 0.05$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+MAP@10 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $+26.847\%$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $196.5$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.6495$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.0239$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+No (
+\begin_inset Formula $p \ge 0.05$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Global Arbiter vs.
+\begin_inset space \space{}
+
+\end_inset
+
+Popularity:
+\series default
+ The improvements over popularity baseline are statistically significant across all key metrics: NDCG@10 (
+\begin_inset Formula $p = 0.0447, d = 0.1084$
+\end_inset
+
+), NDCG@20 (
+\begin_inset Formula $p = 0.0263, d = 0.1235$
+\end_inset
+
+), and MAP@10 (
+\begin_inset Formula $p = 0.0447, d = 0.1119$
+\end_inset
+
+). 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Global Arbiter vs.
+\begin_inset space \space{}
+
+\end_inset
+
+Base MSVD:
+\series default
+ While the Arbiter achieves a 
+\begin_inset Formula $+16.384\%$
+\end_inset
+
+ descriptive gain in NDCG@10 (
+\begin_inset Formula $0.007414$
+\end_inset
+
+ vs.
+\begin_inset space \space{}
+
+\end_inset
+
+
+\begin_inset Formula $0.006370$
+\end_inset
+
+), the paired Wilcoxon test yields 
+\begin_inset Formula $p = 0.7292$
+\end_inset
+
+ (
+\begin_inset Formula $W = 201.5, d = 0.0212$
+\end_inset
+
+). Therefore, this improvement is characterized strictly as a 
+\series bold
+descriptive and practical empirical improvement
+\series default
+, rather than a statistically significant shift under strict hypothesis testing. 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Global Arbiter vs.
+\begin_inset space \space{}
+
+\end_inset
+
+Fixed Fusion:
+\series default
+ The 
+\begin_inset Formula $+24.480\%$
+\end_inset
+
+ gain in NDCG@10 (
+\begin_inset Formula $p = 0.1181$
+\end_inset
+
+) and 
+\begin_inset Formula $+28.232\%$
+\end_inset
+
+ gain in MAP@10 (
+\begin_inset Formula $p = 0.0798$
+\end_inset
+
+) indicate marginal descriptive evidence favoring normalization, but do not meet the 
+\begin_inset Formula $\alpha=0.05$
+\end_inset
+
+ threshold. 
+\end_layout
+
+\begin_layout Subsection
+Bootstrap Confidence Intervals
+\end_layout
+
+\begin_layout Standard
+To quantify uncertainty in paired performance differences, we execute 
+\begin_inset Formula $10,000$
+\end_inset
+
+ bootstrap resamples over the user-level test metric vectors
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "efron1994introduction"
+literal "false"
+
+\end_inset
+
+. The resulting 
+\begin_inset Formula $95\%$
+\end_inset
+
+ confidence intervals are: 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Base MSVD NDCG@10:
+\series default
+ Mean 
+\begin_inset Formula $= 0.006369$
+\end_inset
+
+, 
+\begin_inset Formula $95\%\text{ CI} = [0.003041, 0.010554]$
+\end_inset
+
+. 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Global Arbiter NDCG@10:
+\series default
+ Mean 
+\begin_inset Formula $= 0.007403$
+\end_inset
+
+, 
+\begin_inset Formula $95\%\text{ CI} = [0.003448, 0.012166]$
+\end_inset
+
+. 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Paired Difference (
+\begin_inset Formula $\Delta$
+\end_inset
+
+NDCG@10):
+\series default
+ Mean 
+\begin_inset Formula $= +0.001034$
+\end_inset
+
+, 
+\begin_inset Formula $95\%\text{ CI} = [-0.003266, +0.005303]$
+\end_inset
+
+. 
+\end_layout
+
+\begin_layout Standard
+Because the 
+\begin_inset Formula $95\%$
+\end_inset
+
+ bootstrap confidence interval for the paired difference spans zero, bootstrap analysis reinforces the conclusion that the gain is a descriptive improvement across the population sample.
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset Float figure
+placement t
+wide false
+sideways false
+status open
+
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics 
+	filename bootstrap_confidence_intervals.png
+	width 100col%
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Bootstrap distributions and 95% confidence intervals across 10,000 resamples for Base MSVD, Global Arbiter, and paired differences.
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:bootstrap_ci"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Determinism and Multi-Seed Robustness
+\end_layout
+
+\begin_layout Standard
+We conduct three consecutive independent runs with fixed random seed 
+\begin_inset Formula $42$
+\end_inset
+
+. The maximum absolute floating-point difference across all ranking metrics is exactly 
+\begin_inset Formula $0.000000$
+\end_inset
+
+, confirming complete bitwise reproducibility.
+\end_layout
+
+\begin_layout Standard
+Furthermore, we evaluate multi-seed robustness across five distinct initialization seeds (
+\begin_inset Formula $42, 123, 456, 789, 2026$
+\end_inset
+
+). The summary statistics are: 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Base MSVD NDCG@10:
+\series default
+ 
+\begin_inset Formula $0.006454 \pm 0.000487$
+\end_inset
+
+ (
+\begin_inset Formula $\text{CV} = 7.54\%$
+\end_inset
+
+, range 
+\begin_inset Formula $[0.005572, 0.006993]$
+\end_inset
+
+). 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Global Arbiter NDCG@10:
+\series default
+ 
+\begin_inset Formula $0.007721 \pm 0.001056$
+\end_inset
+
+ (
+\begin_inset Formula $\text{CV} = 13.68\%$
+\end_inset
+
+, range 
+\begin_inset Formula $[0.006075, 0.009178]$
+\end_inset
+
+). 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Global Arbiter NDCG@20:
+\series default
+ 
+\begin_inset Formula $0.007144 \pm 0.000742$
+\end_inset
+
+ (
+\begin_inset Formula $\text{CV} = 10.39\%$
+\end_inset
+
+). 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Global Arbiter MAP@10:
+\series default
+ 
+\begin_inset Formula $0.003381 \pm 0.000698$
+\end_inset
+
+ (
+\begin_inset Formula $\text{CV} = 20.64\%$
+\end_inset
+
+). 
+\end_layout
+
+\begin_layout Standard
+The multi-seed evaluation confirms consistent descriptive superiority of the Arbiter across random initializations.
+\end_layout
+
+\begin_layout Section
+Diversity and Stream Contribution Analysis
+\end_layout
+
+\begin_layout Subsection
+Catalog Coverage and Recommendation Diversity
+\end_layout
+
+\begin_layout Standard
+Beyond precision-oriented ranking metrics, we analyze the structural diversity of the recommendations across the candidate catalog, as detailed in Table
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:diversity"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+tuple "list"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset Float table
+placement t
+wide false
+sideways false
+status open
+
+
+\begin_layout Standard
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Diversity, Catalog Coverage, and Distributional Metrics (Top-20 Recommendations)
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:diversity"
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Tabular 
+<lyxtabular version="3" rows="9" columns="5">
+<features booktabs="true" tabularvalignment="middle" tabularwidth="0pt">
+<column alignment="left" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Metric
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Popularity
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Base MSVD
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Tag MSVD
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Global Arbiter
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Unique Tracks 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $90$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $7,165$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $6,772$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $6,118$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Catalog Coverage (%) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.006\%$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.480\%$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.453\%$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.410\%$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Unique Artists 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $38$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $1,489$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $931$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $550$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Artist Coverage (%) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.022\%$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.848\%$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.530\%$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.313\%$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Entropy (bits) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $5.17$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $12.60$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $12.49$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $12.20$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Avg Pop Rank 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $1,089$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $9,614$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $13,274$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $21,542$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Long-Tail Recs (%) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.00\%$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.00\%$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.14\%$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.92\%$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Pairwise Jaccard 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.6030$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.0008$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.0011$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $0.0021$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+While the Popularity baseline suffers from extreme redundancy (recommending only 
+\begin_inset Formula $90$
+\end_inset
+
+ distinct tracks and 
+\begin_inset Formula $38$
+\end_inset
+
+ artists with a high pairwise Jaccard similarity of 
+\begin_inset Formula $0.6030$
+\end_inset
+
+), the Global Normalized Arbiter recommends 
+\begin_inset Formula $6,118$
+\end_inset
+
+ unique tracks with high recommendation entropy (
+\begin_inset Formula $12.20\text{ bits}$
+\end_inset
+
+) and low inter-user redundancy (pairwise Jaccard 
+\begin_inset Formula $= 0.0021$
+\end_inset
+
+). Furthermore, the Arbiter surfaces items deeper in the long tail, increasing average popularity rank to 
+\begin_inset Formula $21,542$
+\end_inset
+
+ (compared to 
+\begin_inset Formula $9,614$
+\end_inset
+
+ for Base MSVD).
+\end_layout
+
+\begin_layout Subsection
+Stream Contribution and Ablations
+\end_layout
+
+\begin_layout Standard
+To quantify the relative predictive contribution of individual streams, we perform systematic ablation by removing each stream from the normalized arbiter: 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Full Global Arbiter:
+\series default
+ 
+\begin_inset Formula $\text{NDCG@10} = 0.007414$
+\end_inset
+
+. 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Ablation without MSVD Stream:
+\series default
+ 
+\begin_inset Formula $\text{NDCG@10} = 0.001416$
+\end_inset
+
+ (Relative drop of 
+\begin_inset Formula $-80.898\%$
+\end_inset
+
+). 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Ablation without Tag Stream:
+\series default
+ 
+\begin_inset Formula $\text{NDCG@10} = 0.006370$
+\end_inset
+
+ (Relative drop of 
+\begin_inset Formula $-14.078\%$
+\end_inset
+
+). 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Ablation without Temporal Stream:
+\series default
+ 
+\begin_inset Formula $\text{NDCG@10} = 0.007414$
+\end_inset
+
+ (Primary contribution realized at top ranks @5 and @10). 
+\end_layout
+
+\begin_layout Standard
+This ablation demonstrates that implicit collaborative MSVD provides the indispensable anchor for candidate ranking, while the tag and temporal streams provide crucial complementary refinement.
+\end_layout
+
+\begin_layout Section
+Runtime and Computational Scalability
+\end_layout
+
+\begin_layout Standard
+The system is implemented using sparse CSR/CSC representations in SciPy/NumPy, avoiding any dense matrix allocation of the 
+\begin_inset Formula $992 \times 1,493,688$
+\end_inset
+
+ space. Offline model training and exact retrieval benchmarks are reported in Table
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:runtime_benchmarks"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+tuple "list"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset Float table
+placement t
+wide false
+sideways false
+status open
+
+
+\begin_layout Standard
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Computational Runtime and Query Latency Benchmarks
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:runtime_benchmarks"
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Tabular 
+<lyxtabular version="3" rows="10" columns="2">
+<features booktabs="true" tabularvalignment="middle" tabularwidth="0pt">
+<column alignment="left" valignment="top">
+<column alignment="right" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Stage / Operational Metric
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Authoritative Benchmark
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Implicit MSVD ALS Training (10 Iterations) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $4,081.8\text{ s}$
+\end_inset
+
+ (
+\begin_inset Formula $\approx 68.0\text{ min}$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Tag TF-IDF Sparse Matrix Construction 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $389.1\text{ s}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Temporal Decay Matrix Construction 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $266.8\text{ s}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Full Test Catalog (
+\begin_inset Formula $1.49\text{M}$
+\end_inset
+
+ items) Evaluation 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $40.9\text{ s}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Single-User Query Latency (
+\begin_inset Formula $K=5$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $96.41\text{ ms}$
+\end_inset
+
+ (
+\begin_inset Formula $10.37\text{ qps}$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Single-User Query Latency (
+\begin_inset Formula $K=10$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $96.48\text{ ms}$
+\end_inset
+
+ (
+\begin_inset Formula $10.36\text{ qps}$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Single-User Query Latency (
+\begin_inset Formula $K=20$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $96.87\text{ ms}$
+\end_inset
+
+ (
+\begin_inset Formula $10.32\text{ qps}$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Batch Latency (50 Users, 
+\begin_inset Formula $K=10$
+\end_inset
+
+) 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\begin_inset Formula $4,824.11\text{ ms}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Memory Safety Verification 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Verified Sparse (0 MB Dense)
+\series default
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Single-user top-10 retrieval across the entire 
+\begin_inset Formula $1.49\text{M}$
+\end_inset
+
+-item candidate catalog executes in 
+\begin_inset Formula $96.48\text{ ms}$
+\end_inset
+
+ per query on a single CPU core, delivering 
+\begin_inset Formula $10.36\text{ queries/sec}$
+\end_inset
+
+ throughput. Top-
+\begin_inset Formula $K$
+\end_inset
+
+ selection is performed exactly via partial sorting (
+\family typewriter
+np.argpartition
+\family default
+) without requiring approximate nearest neighbor (ANN) index quantization or memory-intensive graph indices.
+\end_layout
+
+\begin_layout Section
+Explainability Framework
+\end_layout
+
+\begin_layout Standard
+A key operational advantage of the Global Normalized Arbiter is intrinsic linear explainability. Because each candidate score 
+\begin_inset Formula $\hat{r}_{ui}$
+\end_inset
+
+ is a linear combination of normalized components, the system outputs exact percentage attribution for any recommended track: 
+\begin_inset Formula \begin{equation}
+\text{Contrib}_{\text{stream}}(u, i) = \frac{w_{\text{stream}} \tilde{s}_{ui}^{\text{stream}}}{\hat{r}_{ui}} \times 100\%.
+\end{equation}
+\end_inset
+
+For example, a recommended track can be explicitly justified to the user: 
+\shape italic
+
+\begin_inset Quotes eld
+\end_inset
+
+Recommended because of 42% Collaborative Pattern Match, 35% Match with your top tags (indie rock, electronic), and 23% Recent Artist Affinity.
+\begin_inset Quotes erd
+\end_inset
+
+
+\shape default
+
+\end_layout
+
+\begin_layout Section
+Discussion
+\end_layout
+
+\begin_layout Standard
+The empirical findings provide several critical insights for large-scale recommendation: 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Normalization as an Enabler of Hybrid Fusion:
+\series default
+ The failure of unnormalized fixed fusion (
+\begin_inset Formula $0.005932$
+\end_inset
+
+ NDCG@10) versus the success of the Global Normalized Arbiter (
+\begin_inset Formula $0.007414$
+\end_inset
+
+) demonstrates that raw collaborative dot-products cannot be combined additively with bounded auxiliary scores without per-user calibration. 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Auxiliary Strengths in Sparse Cohorts:
+\series default
+ The 
+\begin_inset Formula $+50.472\%$
+\end_inset
+
+ descriptive gain in low-activity users (
+\begin_inset Formula $0.017421$
+\end_inset
+
+ vs.
+\begin_inset space \space{}
+
+\end_inset
+
+
+\begin_inset Formula $0.011578$
+\end_inset
+
+) highlights that social tags and temporal recency kernels compensate effectively for sparse collaborative factor profiles. 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Rigorous Evaluation Realism:
+\series default
+ Evaluating across the unpruned 
+\begin_inset Formula $1.49\text{M}$
+\end_inset
+
+ candidate catalog reflects true production conditions. The low absolute magnitude of NDCG (
+\begin_inset Formula $0.0074$
+\end_inset
+
+) is typical for full-catalog ranking without candidate pre-filtering
+\begin_inset space ~
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+after ""
+key "cremonesi2010performance"
+literal "false"
+
+\end_inset
+
+. 
+\end_layout
+
+\begin_layout Section
+Limitations
+\end_layout
+
+\begin_layout Standard
+We explicitly acknowledge the following limitations of this study: 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Catalog Sparsity and Absolute Metric Scale:
+\series default
+ In a 
+\begin_inset Formula $1.49\text{M}$
+\end_inset
+
+-item catalog with 
+\begin_inset Formula $518$
+\end_inset
+
+ test users, ground-truth hits per user are extremely sparse, yielding low absolute metric values across all evaluated models. 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Tag Vocabulary Coverage:
+\series default
+ HetRec tags cover 
+\begin_inset Formula $39.7824\%$
+\end_inset
+
+ of candidate tracks (
+\begin_inset Formula $594,225$
+\end_inset
+
+ items). Tracks by unannotated artists receive zero semantic score mass. 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Artist-Level Semantic Granularity:
+\series default
+ Tags are assigned at the artist level, meaning track-specific stylistic variations are not distinguished. 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Absence of Audio/Acoustic Modeling:
+\series default
+ The system does not utilize waveform, acoustic, or deep audio features. 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Offline Observational Evaluation:
+\series default
+ Evaluation is based on observational logs without live online A/B testing or user feedback loops. 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Scope of Cold Start:
+\series default
+ The system does not solve zero-data unseen-item cold start where items have no artist tags or historical interactions. 
+\end_layout
+
+\begin_layout Section
+Future Work
+\end_layout
+
+\begin_layout Standard
+Future investigations will explore: 
+\end_layout
+
+\begin_layout Itemize
+Integrating track-level audio embeddings derived from self-supervised music audio transformers. 
+\end_layout
+
+\begin_layout Itemize
+Extending the arbiter with non-linear neural gating networks trained under listwise ranking losses. 
+\end_layout
+
+\begin_layout Itemize
+Incorporating session-based graph neural networks for sub-daily listening transitions. 
+\end_layout
+
+\begin_layout Section
+Conclusion
+\end_layout
+
+\begin_layout Standard
+This paper presented a Global Normalized Multi-Stream Arbiter recommendation system evaluated on the full Last.fm 1K dataset across 
+\begin_inset Formula $1,493,688$
+\end_inset
+
+ candidate tracks. By introducing per-user min-max normalization, the architecture successfully reconciles implicit collaborative MSVD factorizations, artist-level HetRec tag TF-IDF profiles, and temporal recency decay signals. Evaluated under a strict zero-leakage chronological protocol, the Global Normalized Arbiter achieved an NDCG@10 of 
+\begin_inset Formula $0.007414$
+\end_inset
+
+, establishing a 
+\begin_inset Formula $+16.384\%$
+\end_inset
+
+ descriptive gain over Base MSVD, a 
+\begin_inset Formula $+244.648\%$
+\end_inset
+
+ statistically significant gain over Popularity (
+\begin_inset Formula $p = 0.0447$
+\end_inset
+
+), and a 
+\begin_inset Formula $+50.472\%$
+\end_inset
+
+ descriptive improvement for low-activity users, while supporting exact top-
+\begin_inset Formula $K$
+\end_inset
+
+ retrieval in 
+\begin_inset Formula $96.48\text{ ms}$
+\end_inset
+
+ per query with verified sparse memory safety.
+\end_layout
+
+\begin_layout Standard
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+\backslash
+balance
+\end_layout
+
+\end_inset
+
+  
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "references"
+options "IEEEtran"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

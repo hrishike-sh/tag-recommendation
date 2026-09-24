@@ -1,0 +1,11 @@
+{
+  "best_gamma": 0.1,
+  "best_alpha": 1.0,
+  "val_ndcg10": 0.016459530580996824,
+  "val_recall10": 0.0005779465305107228,
+  "beta": 1.0,
+  "factors": 64,
+  "regularization": 0.05,
+  "kappa": 40.0,
+  "iterations": 10
+}

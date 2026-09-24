@@ -1,0 +1,9 @@
+{
+  "factors": 64,
+  "regularization": 0.05,
+  "iterations": 10,
+  "kappa": 40.0,
+  "best_beta": 1.0,
+  "tag_vocab_size": 2299,
+  "similarity_function": "cosine (L2 normalized TF-IDF dot product)"
+}

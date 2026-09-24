@@ -1,0 +1,10 @@
+{
+  "tag_build_time_sec": 387.58986170002026,
+  "val_als_time_sec": 20577.82024859998,
+  "val_grid_search_time_sec": 3675.1195622999803,
+  "test_temp_matrix_time_sec": 125.70232250000117,
+  "test_als_time_sec": 4096.291976700013,
+  "evaluation_time_sec": 58.26138790001278,
+  "total_runtime_sec": 29272.52816690001,
+  "peak_memory_mb": 7845.744116783142
+}

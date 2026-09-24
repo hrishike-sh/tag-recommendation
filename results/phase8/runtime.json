@@ -1,0 +1,9 @@
+{
+  "tag_build_time_sec": 389.10264409999945,
+  "temp_build_time_sec": 266.8229305999994,
+  "val_als_time_sec": 3357.67024810001,
+  "test_als_time_sec": 4081.800924400013,
+  "evaluation_time_sec": 40.89598689999548,
+  "total_runtime_sec": 10351.084897499997,
+  "peak_memory_mb": 2512.3047800064087
+}

@@ -1,0 +1,21 @@
+{
+  "status": "PASSED",
+  "global_start": "2005-02-14 00:00:07+00:00",
+  "global_end": "2009-06-19 21:31:16+00:00",
+  "train_max_timestamp": "2009-03-31 23:59:57+00:00",
+  "val_min_timestamp": "2009-04-01 00:00:03+00:00",
+  "val_max_timestamp": "2009-04-30 23:59:57+00:00",
+  "test_min_timestamp": "2009-05-01 00:00:00+00:00",
+  "test_max_timestamp": "2009-06-19 21:31:16+00:00",
+  "total_clean_events": 19150865,
+  "total_users": 992,
+  "total_items": 1505185,
+  "assertions": {
+    "train_strictly_before_val": true,
+    "val_strictly_before_test": true,
+    "tag_vocabulary_independent_of_test": true,
+    "temporal_profiles_strictly_prior_to_cutoff": true,
+    "hyperparameters_selected_only_on_val": true,
+    "test_eval_run_once_post_selection": true
+  }
+}

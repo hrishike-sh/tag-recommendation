@@ -1,0 +1,11 @@
+{
+  "factors": 64,
+  "regularization": 0.05,
+  "iterations": 10,
+  "seed": 42,
+  "kappa": 40.0,
+  "train_time_sec": 3600.1546342999936,
+  "avg_epoch_time_sec": 360.0154634299994,
+  "eval_time_sec": 14.345796399997198,
+  "peak_mem_mb": 1245.5663814544678
+}

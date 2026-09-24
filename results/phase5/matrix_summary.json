@@ -1,0 +1,10 @@
+{
+  "train_shape": [
+    991,
+    1493688
+  ],
+  "train_nnz": 4584444,
+  "train_density_pct": 0.30970850059553123,
+  "evaluable_test_users": 518,
+  "split_construction_time_sec": 11.378814700001385
+}

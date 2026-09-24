@@ -1,0 +1,14 @@
+{
+  "dataset": "1k",
+  "events": 19150865,
+  "train_matrix_shape": [
+    991,
+    1493688
+  ],
+  "popularity_fit_sec": 0.058044100005645305,
+  "popularity_eval_sec": 0.41750099998898804,
+  "als_train_sec": 3600.1546342999936,
+  "als_epoch_avg_sec": 360.0154634299994,
+  "als_eval_sec": 14.345796399997198,
+  "peak_memory_mb": 1245.5663814544678
+}

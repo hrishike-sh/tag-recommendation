@@ -1,0 +1,8 @@
+{
+  "factors": 64,
+  "regularization": 0.05,
+  "iterations": 10,
+  "seed": 42,
+  "val_ndcg10": 0.07795276569520038,
+  "selection_metric": "NDCG@10 on validation split"
+}

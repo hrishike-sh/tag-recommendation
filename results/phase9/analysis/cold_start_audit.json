@@ -1,0 +1,25 @@
+{
+  "catalog_size": 1493688,
+  "item_coverage": {
+    "known_collaborative_items": 1493688,
+    "known_collaborative_pct": 100.0,
+    "tag_covered_items": 594225,
+    "tag_covered_pct": 39.782404357536514,
+    "temporal_history_items": 1369529,
+    "temporal_history_pct": 91.68775540809058,
+    "fully_cold_items": 0,
+    "fully_cold_pct": 0.0
+  },
+  "test_interaction_mass": {
+    "total_test_interactions": 87454,
+    "collab_item_mass": 87454,
+    "collab_item_mass_pct": 100.0,
+    "tag_covered_item_mass": 65302,
+    "tag_covered_item_mass_pct": 74.67011228760263,
+    "temporal_item_mass": 86980,
+    "temporal_item_mass_pct": 99.45800077755163,
+    "fully_cold_item_mass": 0,
+    "fully_cold_item_mass_pct": 0.0
+  },
+  "scientific_finding": "Tag fusion provides semantic warm-up for 39.78% of the catalog, but fully cold items represent 0.0% of test interactions in standard closed-catalog splits because candidates must have pre-existing track metadata."
+}

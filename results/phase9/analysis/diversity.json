@@ -1,0 +1,52 @@
+{
+  "Popularity": {
+    "unique_recommended_tracks_top20": 90,
+    "catalog_coverage_pct": 0.006025354692546234,
+    "unique_recommended_artists": 38,
+    "artist_coverage_pct": 0.021629621197028773,
+    "recommendation_entropy": 5.167608214732541,
+    "average_popularity_rank": 1088.9662162162163,
+    "long_tail_recommendation_pct": 0.0,
+    "average_pairwise_jaccard_similarity": 0.6029524880540565
+  },
+  "Base_MSVD": {
+    "unique_recommended_tracks_top20": 7165,
+    "catalog_coverage_pct": 0.479685181912153,
+    "unique_recommended_artists": 1489,
+    "artist_coverage_pct": 0.8475396305888381,
+    "recommendation_entropy": 12.604592037286594,
+    "average_popularity_rank": 9613.68918918919,
+    "long_tail_recommendation_pct": 0.0,
+    "average_pairwise_jaccard_similarity": 0.0008468829521461101
+  },
+  "Tag_Fused_MSVD": {
+    "unique_recommended_tracks_top20": 6772,
+    "catalog_coverage_pct": 0.4533744664213678,
+    "unique_recommended_artists": 931,
+    "artist_coverage_pct": 0.5299257193272049,
+    "recommendation_entropy": 12.487716646551593,
+    "average_popularity_rank": 13274.011003861004,
+    "long_tail_recommendation_pct": 0.13513513513513514,
+    "average_pairwise_jaccard_similarity": 0.0011269514262290318
+  },
+  "Temporal_MSVD": {
+    "unique_recommended_tracks_top20": 7165,
+    "catalog_coverage_pct": 0.479685181912153,
+    "unique_recommended_artists": 1489,
+    "artist_coverage_pct": 0.8475396305888381,
+    "recommendation_entropy": 12.604592037286594,
+    "average_popularity_rank": 9613.68918918919,
+    "long_tail_recommendation_pct": 0.0,
+    "average_pairwise_jaccard_similarity": 0.0009298149649026841
+  },
+  "Global_Arbiter": {
+    "unique_recommended_tracks_top20": 6118,
+    "catalog_coverage_pct": 0.40959022232219844,
+    "unique_recommended_artists": 550,
+    "artist_coverage_pct": 0.31306030679910063,
+    "recommendation_entropy": 12.195600011610667,
+    "average_popularity_rank": 21541.70916988417,
+    "long_tail_recommendation_pct": 0.916988416988417,
+    "average_pairwise_jaccard_similarity": 0.0020851160855367506
+  }
+}

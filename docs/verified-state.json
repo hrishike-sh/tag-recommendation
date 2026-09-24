@@ -1,0 +1,117 @@
+{
+  "verified_at": "2026-09-15T16:40:02.113144+00:00",
+  "checks": {
+    "1k: ingestion conservation": true,
+    "1k: source line total": true,
+    "1k: matrix edges and confidence": true,
+    "1k: contiguous user mapping": true,
+    "1k: contiguous item mapping": true,
+    "1k: no future leakage and temporal count conservation": true,
+    "1k: counts CSR shape": true,
+    "1k: CSR count conservation": true,
+    "1k: preferences CSR shape": true,
+    "1k: CSR binary preferences": true,
+    "1k: confidence_delta CSR shape": true,
+    "360k: ingestion conservation": true,
+    "360k: source line total": true,
+    "360k: matrix edges and confidence": true,
+    "360k: contiguous user mapping": true,
+    "360k: contiguous item mapping": true,
+    "360k: aggregate play conservation": true,
+    "360k: only valid source user IDs": true,
+    "360k: counts CSR shape": true,
+    "360k: CSR count conservation": true,
+    "360k: preferences CSR shape": true,
+    "360k: CSR binary preferences": true,
+    "360k: confidence_delta CSR shape": true,
+    "1k: physical file pruning": true,
+    "python_tests": true,
+    "go_tests": true,
+    "go_vet": true,
+    "go_smoke": true,
+    "Go/Python formula agreement": true
+  },
+  "datasets": {
+    "1k": {
+      "source_url": "https://mtg.upf.edu/static/datasets/last.fm/lastfm-dataset-1K.tar.gz",
+      "archive_bytes": 672741554,
+      "archive_sha256": "c8075a048b0e14737c0b38d708f9e8e56a37193f33c6592e599bfcaa982bdb70",
+      "ingestion": {
+        "dataset": "1k",
+        "source_sha256": "529b8f83aadabdead189de06d816e213557221b92cb43c46f25840e07ef3399a",
+        "raw_parsed_rows": 19150868,
+        "parse_rejected_rows": 0,
+        "validation_rejected_rows": 2,
+        "clean_rows": 19150865,
+        "users": 992,
+        "items": 1505185,
+        "duplicates_removed": 1,
+        "timestamp_min": "2005-02-14 00:00:07+00:00",
+        "timestamp_max": "2009-06-19 21:31:16+00:00",
+        "partitions": 53,
+        "timestamp_policy": "UTC; [2002-01-01,2009-07-01); snapshot-specific outlier quarantine"
+      },
+      "matrix": {
+        "dataset": "1k",
+        "item_type": "track",
+        "shape": [
+          991,
+          1493688
+        ],
+        "observed_pairs": 4584444,
+        "kappa": 40,
+        "exclusive_cutoff_utc": "2009-05-01T00:00:00+00:00",
+        "recent_days": 90,
+        "preference": "1[count > 0]",
+        "confidence": "1 + kappa * ln(1 + count)",
+        "missing_pair": {
+          "preference": 0,
+          "confidence": 1,
+          "confidence_delta": 0
+        },
+        "npz_exported": true
+      },
+      "snapshot_path": "data/lake/1k/529b8f83aada-e0671d2d",
+      "matrix_path": "artifacts/matrices/1k/a10ff48e7792"
+    },
+    "360k": {
+      "source_url": "https://mtg.upf.edu/static/datasets/last.fm/lastfm-dataset-360K.tar.gz",
+      "archive_bytes": 569202935,
+      "archive_sha256": "375b53f5a72790e51166cfba052ae5e093f587ece817577185188855ac10f9f0",
+      "ingestion": {
+        "dataset": "360k",
+        "source_sha256": "4b592270ed4a5eac578d1d469bc85881e07de5d45c59d64ac5154867c89bf712",
+        "raw_parsed_rows": 17559530,
+        "parse_rejected_rows": 0,
+        "validation_rejected_rows": 88,
+        "clean_rows": 17559021,
+        "users": 359347,
+        "items": 268655,
+        "merged_user_artist_rows": 421,
+        "timestamp_policy": "No listening timestamps exist; no fabricated temporal partitions"
+      },
+      "matrix": {
+        "dataset": "360k",
+        "item_type": "artist",
+        "shape": [
+          359347,
+          268655
+        ],
+        "observed_pairs": 17559021,
+        "kappa": 40,
+        "exclusive_cutoff_utc": null,
+        "recent_days": null,
+        "preference": "1[count > 0]",
+        "confidence": "1 + kappa * ln(1 + count)",
+        "missing_pair": {
+          "preference": 0,
+          "confidence": 1,
+          "confidence_delta": 0
+        },
+        "npz_exported": true
+      },
+      "snapshot_path": "data/lake/360k/4b592270ed4a-e55daf1f",
+      "matrix_path": "artifacts/matrices/360k/766416c8151d"
+    }
+  }
+}

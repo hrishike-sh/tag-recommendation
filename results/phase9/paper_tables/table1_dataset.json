@@ -1,0 +1,11 @@
+{
+  "Dataset": "Last.fm 1K",
+  "Raw Listening Events": 19150865,
+  "Clean Users": 992,
+  "Unique Candidate Catalog Tracks": 1493688,
+  "Track Metadata Coverage": 1505514,
+  "HetRec Artist Tags": 2299,
+  "Train Period": "< 2009-04-01T00:00:00+00:00",
+  "Validation Period": "[2009-04-01T00:00:00+00:00, 2009-05-01T00:00:00+00:00)",
+  "Test Period": "[2009-05-01T00:00:00+00:00, 2009-07-01T00:00:00Z)"
+}

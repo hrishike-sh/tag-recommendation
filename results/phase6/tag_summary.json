@@ -1,0 +1,5 @@
+{
+  "tag_vocab_size": 2299,
+  "test_tag_matrix_nnz": 11920822,
+  "tag_build_time_sec": 198.82214889999887
+}

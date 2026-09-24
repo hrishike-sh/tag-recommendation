@@ -1,0 +1,33 @@
+{
+  "dataset": "Last.fm 1K",
+  "row_counts": 19150865,
+  "total_users": 992,
+  "catalog_size": 1493688,
+  "test_evaluable_users": 518,
+  "train_cutoff": "2009-04-01T00:00:00Z",
+  "val_cutoff": "2009-05-01T00:00:00Z",
+  "test_end": "2009-07-01T00:00:00Z",
+  "tag_matrix_shape": [
+    1493688,
+    2299
+  ],
+  "tag_matrix_nnz": 11920822,
+  "temporal_matrix_shape": [
+    991,
+    1493688
+  ],
+  "temporal_matrix_nnz": 4009238,
+  "phase8_target_metrics": {
+    "Global_Normalized_Arbiter": {
+      "NDCG@10": 0.007414,
+      "NDCG@20": 0.006985,
+      "MAP@10": 0.003554
+    },
+    "Base_MSVD": {
+      "NDCG@10": 0.00637,
+      "NDCG@20": 0.005598,
+      "MAP@10": 0.002802
+    }
+  },
+  "verification_status": "VERIFIED_IDENTICAL"
+}

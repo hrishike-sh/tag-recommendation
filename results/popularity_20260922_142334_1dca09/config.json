@@ -1,0 +1,22 @@
+{
+  "run_id": "popularity_20260922_142334_1dca09",
+  "model_type": "popularity",
+  "dataset": "1k",
+  "train_cutoff": "2009-05-01T00:00:00+00:00",
+  "test_end": null,
+  "factors": null,
+  "regularization": null,
+  "iterations": null,
+  "seed": 42,
+  "kappa": 40.0,
+  "k_list": [
+    5,
+    10,
+    20
+  ],
+  "n_users": 50,
+  "n_items": 100,
+  "evaluable_users": 50,
+  "train_time_sec": 0.00024780000967439264,
+  "eval_time_sec": 0.0017265000060433522
+}

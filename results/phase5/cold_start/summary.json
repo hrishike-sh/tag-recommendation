@@ -1,0 +1,7 @@
+{
+  "total_test_interactions": 194252,
+  "test_interactions_in_training_catalog": 170991,
+  "test_interactions_future_only_items": 23261,
+  "future_only_tracks_count": 11497,
+  "cold_start_unreachable_percentage": 11.974651483639807
+}

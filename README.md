@@ -2,6 +2,46 @@
 
 Repository: https://github.com/hrishike-sh/tag-recommendation
 
+## Reprise web interface
+
+```powershell
+uv sync --frozen --extra dev
+uv run lastfm-web
+```
+
+Open http://127.0.0.1:8766. Reprise provides dataset overview, listener history,
+discovery/nostalgia blend controls, dormant favorite filters, background run logs,
+per-track explanation dialogs, and JSON export. It binds only to loopback. Use
+`--port 8768` for another port or `--root PATH` for a different prepared workspace.
+The default cutoff is May 1, 2009 UTC. 360K supports history exploration only.
+
+Recommendation jobs fit the existing offline model per invocation and can be slow.
+Keep the server running until completion. Only one job runs at a time; job history
+is scoped to the server session. Logs and JSON results remain in ignored
+`tmp/reprise-jobs/`. Missing real tags are shown explicitly; no synthetic examples
+are injected into the research workspace. The design concept is saved in
+`output/design/reprise-concept.png`.
+
+Recording script: [Five-person UI update](docs/five-person-reprise-ui-script.md).
+
+## September 30: dual-memory recommendation
+
+`recommend` now defaults to proposal Equation 9 nostalgia plus discovery, with
+active-window dormancy detection, a dynamic alpha blend, and explanation tuples.
+The previous experimental three-signal engine is available with `--mode global`.
+See [the implementation contract](docs/dual-memory.md) for formulas, limitations,
+and output fields; the data-foundation sections below describe the early milestone.
+
+```powershell
+uv run lastfm recommend --user user_000001 --k 10
+uv run lastfm recommend --user user_000001 --alpha 0.6 --recent-days 90 --min-historical-plays 5 --half-life-days 90
+```
+
+This existing CLI still fits the collaborative model per invocation; it is an
+offline research command, not a cached low-latency server.
+Missing historical tags produce zero nostalgia scores and an explicit automatic
+fallback to discovery, never fabricated context matches.
+
 The repository includes source code, tests, reproducibility instructions, the
 portable verification summary and `output/pdf/LastFM_Team_Handover.pdf`. Original
 research/reference PDFs, raw datasets, generated matrices, local environments and

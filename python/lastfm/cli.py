@@ -33,9 +33,14 @@ def main():
             p.add_argument("--k", nargs="+", type=int, default=[5, 10, 20])
             p.add_argument("--out", type=Path)
         if command == "recommend":
+            p.add_argument("--mode", choices=["dual", "global"], default="dual")
+            p.add_argument("--alpha", type=float, help="Discovery weight [0,1]; omitted = dynamic")
+            p.add_argument("--recent-days", type=int, default=90)
+            p.add_argument("--min-historical-plays", type=int, default=5)
+            p.add_argument("--half-life-days", type=float, default=90)
             p.add_argument("--user", required=True, help="User ID (e.g. user_000001 or 0)")
             p.add_argument("--k", type=int, default=10, help="Number of items to recommend")
-            p.add_argument("--weights", nargs=3, type=float, default=[0.20, 0.30, 0.50], help="Weights for [MSVD, Tag, Temporal]")
+            p.add_argument("--weights", nargs=3, type=float, default=[0.20, 0.30, 0.50], help="Global mode only: weights for [MSVD, Tag, Temporal]")
     sub.add_parser("inspect")
     args = parser.parse_args()
     root = args.root.resolve()
@@ -68,6 +73,8 @@ def main():
             user_query=args.user,
             k=args.k,
             weights=args.weights,
+            mode=args.mode, alpha=args.alpha, recent_days=args.recent_days,
+            min_historical_plays=args.min_historical_plays, half_life_days=args.half_life_days,
         )
     else:
         with connect(root) as db:

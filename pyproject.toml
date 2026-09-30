@@ -13,6 +13,7 @@ dependencies = [
     "scipy>=1.15,<2",
     "pytz>=2025",
     "matplotlib>=3.11.2",
+    "flask>=3.1,<4",
 ]
 
 [project.optional-dependencies]
@@ -21,6 +22,7 @@ docs = ["reportlab>=4,<5"]
 
 [project.scripts]
 lastfm = "lastfm.cli:main"
+lastfm-web = "lastfm.web:main"
 
 [tool.setuptools.packages.find]
 where = ["python"]
@@ -28,3 +30,6 @@ where = ["python"]
 [tool.pytest.ini_options]
 pythonpath = ["python"]
 testpaths = ["tests"]
+
+[tool.setuptools.package-data]
+lastfm = ["ui/*"]

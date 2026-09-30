@@ -22,14 +22,19 @@ def build_tag_matrix(
     item_ids: Sequence[str],
     track_metadata_parquet: Path,
     min_tag_freq: int = 5,
+    cutoff_iso: Optional[str] = None,
 ) -> Tuple[sp.csr_matrix, Dict[str, int]]:
     """Build L2-normalized TF-IDF item tag matrix (I x T) for candidate items."""
     import duckdb
+    from .ingest import literal
 
     raw_tags = root / "data/raw/hetrec2011-lastfm-2k"
     if not (raw_tags / "user_taggedartists.dat").exists():
-        from ..scripts.inspect_hetrec import acquire_hetrec
-        acquire_hetrec(root)
+        raise FileNotFoundError(f"Import HetRec data into {raw_tags} before building tags")
+
+    from .nostalgia import utc_cutoff
+    from datetime import datetime, timezone
+    tag_cutoff = utc_cutoff(cutoff_iso) if cutoff_iso else None
 
     # 1. Load HetRec artists and tags
     hetrec_artists: Dict[int, str] = {}
@@ -48,6 +53,12 @@ def build_tag_matrix(
         next(reader)
         for row in reader:
             if len(row) >= 3:
+                if tag_cutoff is not None:
+                    if len(row) < 6:
+                        raise ValueError("Timestamped HetRec assignments required for historical tags")
+                    assigned = datetime(int(row[5]), int(row[4]), int(row[3]), tzinfo=timezone.utc)
+                    if assigned >= tag_cutoff:
+                        continue
                 a_id, t_id = int(row[1]), int(row[2])
                 if a_id in hetrec_artists:
                     a_name = hetrec_artists[a_id]
@@ -65,10 +76,12 @@ def build_tag_matrix(
     db = duckdb.connect()
     item_rows = db.execute(f"""
         SELECT item_id, lower(trim(artist_name)) AS artist_norm
-        FROM read_parquet('{track_metadata_parquet.as_posix()}')
+        FROM read_parquet({literal(track_metadata_parquet.as_posix())})
         WHERE artist_name IS NOT NULL
+        ORDER BY item_id, artist_norm
     """).fetchall()
-    item_to_artist = {r[0]: r[1] for r in item_rows}
+    db.close()
+    item_to_artist = {r[0]: r[1] for r in reversed(item_rows)}
 
     # 3. Construct sparse TF matrix (I x T)
     rows: List[int] = []

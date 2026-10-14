@@ -153,9 +153,18 @@ def create_app(root):
     def start():
         body=request.get_json(silent=True)
         if not isinstance(body,dict): raise ValueError('Expected job settings')
-        user=body.get('user','')
+        kind=body.get('kind','recommend')
+        if kind not in ('recommend','evaluation','benchmark'): raise ValueError('Unknown run type')
+        user=body.get('user','') if kind=='recommend' else 'Evaluation cohort'
         if not isinstance(user,str) or not user.strip(): raise ValueError('Choose a listener')
-        options={'user':user.strip()}
+        options={'user':user.strip(),'kind':kind}
+        retrieval=body.get('retrieval','exact')
+        if retrieval not in ('exact','hnsw'): raise ValueError('Invalid retrieval mode')
+        options['retrieval']=retrieval
+        for name,default,low,high in [('candidates',500,50,10000),('max_users',20,1,100)]:
+            value=body.get(name,default)
+            if type(value)!=int or not low<=value<=high: raise ValueError(f'Invalid {name}')
+            options[name]=value
         for name,default,low,high in [('k',10,1,50),('recent_days',90,1,3650),('min_historical_plays',5,1,10000),('half_life_days',90,1,3650)]:
             value=body.get(name,default)
             if type(value)!=int or not low<=value<=high: raise ValueError(f'Invalid {name}')
@@ -164,7 +173,7 @@ def create_app(root):
         if alpha is not None and (type(alpha) not in (int,float) or not math.isfinite(alpha) or not 0<=alpha<=1): raise ValueError('Alpha must be between zero and one')
         options['alpha']=alpha
         matrix=source('matrix','1k')
-        if not query(f'SELECT user_id FROM read_parquet({literal((matrix/"users.parquet").as_posix())}) WHERE user_id=?',[user]): raise ValueError('Unknown listener')
+        if kind=='recommend' and not query(f'SELECT user_id FROM read_parquet({literal((matrix/"users.parquet").as_posix())}) WHERE user_id=?',[user]): raise ValueError('Unknown listener')
         with lock:
             if any(j['status']=='running' for j in jobs.values()): return jsonify(error='A run is already in progress'),409
             job_id=uuid.uuid4().hex[:12]

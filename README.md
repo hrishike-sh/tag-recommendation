@@ -144,3 +144,15 @@ After full ingestion and matrix generation, run `uv run python scripts/verify.py
 to refresh the full-data audit and portable `docs/verified-state.json`. Rebuild the
 handover with `uv run --extra docs python scripts/build_handover.py` after a passing
 audit. The PDF goes to `output/pdf/LastFM_Team_Handover.pdf`.
+
+## Shared service, quality evaluation, and HNSW
+
+The dual-stream CLI and Reprise jobs now load a reusable `RecommendationService` bundle instead of fitting per request. **Evaluation lab** runs scikit-learn quality evaluation (NDCG, novelty, tag diversity, nostalgia recall) and an exact-versus-FAISS-HNSW latency benchmark. Exact ranking remains the default; HNSW is an experimental candidate path.
+
+```powershell
+uv sync --extra dev --extra evaluation --extra ann
+uv run --no-sync lastfm-service prepare
+uv run --no-sync lastfm-web
+```
+
+Read [the service and evaluation guide](docs/service-evaluation.md) for the temporal protocol, formulas, cohort rules, CLI commands, cache behavior, and latency limitations. The [five-person service demo script](docs/five-person-service-evaluation-script.md) includes screen cues and speaking parts.

@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-14",
+  "scope": "Pipeline smoke validation, not final research performance",
+  "tests": {
+    "passed": 47
+  },
+  "browser": "Synthetic quality and latency jobs completed and rendered without console errors",
+  "dependencies": {
+    "python": "3.12.13",
+    "scikit_learn": "1.9.1",
+    "faiss": "1.15.1"
+  },
+  "model": {
+    "factors": 8,
+    "iterations": 1,
+    "seed": 42,
+    "training_users": 991,
+    "training_items": 1493688,
+    "fit_seconds": 120.4707140999999,
+    "tags_available": false
+  },
+  "quality": {
+    "cutoff": "2009-05-01T00:00:00Z",
+    "test_end": "2009-07-01T00:00:00Z",
+    "sampled_users": 20,
+    "evaluated_users": 20,
+    "exclusions": {
+      "holdout_pairs": 99647,
+      "excluded_unknown_user_pairs": 269,
+      "excluded_unknown_item_pairs": 11924
+    },
+    "metrics": {
+      "10": {
+        "ndcg": 0.0,
+        "ndcg_users": 20,
+        "novelty_bits": 4.274646646988387,
+        "novelty_bits_users": 20,
+        "diversity": null,
+        "diversity_users": 0,
+        "nostalgia_recall": 0.0,
+        "nostalgia_recall_users": 10,
+        "tag_coverage": 0.0,
+        "tag_coverage_users": 20
+      }
+    }
+  },
+  "benchmark": {
+    "k": 10,
+    "candidates": 500,
+    "repeats": 3,
+    "users": 3,
+    "overlap_at_k": 1.0,
+    "latency_ms": {
+      "exact": {
+        "p50": 1026.1400999997932,
+        "p95": 1214.3834200001038
+      },
+      "hnsw": {
+        "p50": 992.287000000033,
+        "p95": 1309.3820199998845
+      }
+    },
+    "index_build_or_load_ms": 358.6849999996957,
+    "note": "Warm end-to-end ranking; excludes model load/fit and history I/O. HNSW uses shortlist normalization and may change rankings. No speedup assumed."
+  },
+  "interpretation": "No positive NDCG@10 on this small one-iteration smoke cohort. Tags absent: diversity undefined and nostalgia recall zero. Three-listener ANN overlap is not a general recall guarantee; p95 is worse than exact in this run."
+}

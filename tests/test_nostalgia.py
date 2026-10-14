@@ -98,24 +98,24 @@ def test_historical_tag_assignments_filtered(tmp_path):
 
 def test_engine_wiring_without_expensive_training(tmp_path,monkeypatch):
     import lastfm.recommend_engine as engine
-    import lastfm.nostalgia as nostalgia
+    import lastfm.service as service_module
     import duckdb
     ids=['old','active','new']
     pref=sp.csr_matrix([[1,1,0]],dtype=np.float32)
-    monkeypatch.setattr(engine,'split_train_val_test',lambda *a,**k: {'test_split':dict(
+    monkeypatch.setattr(service_module,'split_train_val_test',lambda *a,**k: {'test_split':dict(
         user_ids=['u'],item_ids=ids,P_train=pref,D_train=pref*2)})
     class Model:
         def __init__(self,**kw): pass
         def fit(self,*a,**kw):
             self.user_factors=np.array([[1.]])
             self.item_factors=np.array([[1.],[2.],[3.]])
-    monkeypatch.setattr(engine,'ImplicitMSVD',Model)
+    monkeypatch.setattr(service_module,'ImplicitMSVD',Model)
     snapshot=tmp_path/'snapshot'; snapshot.mkdir()
     reports=tmp_path/'artifacts/reports'; reports.mkdir(parents=True)
     (reports/'ingest-1k.json').write_text(json.dumps({'snapshot':str(snapshot)}))
     with duckdb.connect() as db:
         db.execute("COPY (SELECT 'old' AS item_id, 'Artist' AS artist_name, 'Song' AS track_name) TO ? (FORMAT PARQUET)",[str(snapshot/'track_metadata.parquet')])
-    monkeypatch.setattr(nostalgia,'listening_history',lambda *a: [history_row('old',9),history_row('active',0,1,age=1)])
+    monkeypatch.setattr(service_module.RecommendationService,'history',lambda *a: [history_row('old',9),history_row('active',0,1,age=1)])
     missing=engine.get_recommendations_with_explanations(tmp_path,'u')
     assert missing['tags_available'] is False and missing['alpha']==1
     assert [r['item_id'] for r in missing['recommendations']]==['new']
@@ -125,7 +125,7 @@ def test_engine_wiring_without_expensive_training(tmp_path,monkeypatch):
     def tags(*a,**kw):
         assert kw['cutoff_iso']=='2009-05-01T00:00:00Z'
         return sp.csr_matrix([[1],[1],[1]]),{1:0}
-    monkeypatch.setattr(engine,'build_tag_matrix',tags)
+    monkeypatch.setattr(service_module,'build_tag_matrix',tags)
     result=engine.get_recommendations_with_explanations(tmp_path,'u',alpha=0)
     json.dumps(result,allow_nan=False)
     assert result['recommendations'][0]['kind']=='nostalgia'

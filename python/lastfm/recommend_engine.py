@@ -56,6 +56,11 @@ def get_recommendations_with_explanations(
         raise ValueError("k must be a nonnegative integer")
     if mode == "global" and alpha is not None:
         raise ValueError("alpha is only available in dual mode")
+    if mode == "dual":
+        from .service import RecommendationService
+        return RecommendationService.open(root).recommend(user_query, k=k, alpha=alpha,
+            recent_days=recent_days, min_historical_plays=min_historical_plays,
+            half_life_days=half_life_days)
     cutoff = "2009-05-01T00:00:00Z"
     # 1. Load splits and matrices
     splits = split_train_val_test(
@@ -100,50 +105,6 @@ def get_recommendations_with_explanations(
         T_test = sp.csr_matrix((len(test_item_ids), 0), dtype=np.float32)
         vocabulary = {}
 
-    if mode == "dual":
-        # Keep Stream A's current collaborative + cosine-tag formulation; B uses
-        # proposal Eq. 7 active-context overlap and Eq. 9 nostalgia, not recency.
-        profile = (P_train.getrow(user_index) + D_train.getrow(user_index)) @ T_test
-        profile = np.asarray(profile.toarray()).ravel()
-        norm = np.linalg.norm(profile)
-        if norm > 0: profile /= norm
-        a_scores = normalize_scores(msvd.user_factors[user_index] @ msvd.item_factors.T)
-        a_scores = a_scores + np.asarray(T_test @ profile).ravel()
-        history = listening_history(root, user_id, cutoff, recent_days)
-        dormant = score_dormant(history, test_item_ids, T_test, cutoff, recent_days,
-                                min_historical_plays, half_life_days)
-        names = {}
-        names_file = tag_file.parent / "tags.dat"
-        if vocabulary and names_file.exists():
-            with names_file.open(encoding="latin-1") as handle:
-                for row in csv.DictReader(handle, delimiter="\t"):
-                    tag_id = int(row["tagID"])
-                    if tag_id in vocabulary: names[vocabulary[tag_id]] = row["tagValue"]
-        output = DynamicTemporalArbiter().recommend(a_scores, test_item_ids, history,
-            dormant, cutoff, recent_days, alpha, k, names)
-        from .ingest import literal
-        with duckdb.connect() as con:
-            meta_rows = con.execute(f"SELECT item_id, artist_name, track_name FROM read_parquet({literal(meta_parquet.as_posix())}) ORDER BY item_id, artist_name, track_name").fetchall()
-        lookup = {row[0]: row[1:] for row in reversed(meta_rows)}
-        item_index = {item: idx for idx, item in enumerate(test_item_ids)}
-        for rank, record in enumerate(output["recommendations"], 1):
-            if record["kind"] == "novelty":
-                tagrow = T_test.getrow(item_index[record["item_id"]])
-                shared = [int(t) for t in tagrow.indices if profile[t] > 0]
-                shared.sort(key=lambda t: (-profile[t], t))
-                shared_names = tuple(names.get(t, f"tag:{t}") for t in shared[:10])
-                record["explanation_tuple"] = record["explanation_tuple"]._replace(shared_tags=shared_names)
-                if shared_names:
-                    record["reason"] = "Unheard track ranked by collaborative and artist-tag affinity; shared historical-profile tags: " + ", ".join(shared_names) + "."
-            artist, track = lookup.get(record["item_id"], (None, None))
-            record.update(rank=rank, artist_name=artist, track_name=track)
-        output.update(user_id=user_id, user_index=user_index, model="Dual-memory temporal arbiter",
-            cutoff=cutoff, recent_days=recent_days, min_historical_plays=min_historical_plays,
-            half_life_days=half_life_days, k=k, dormant_candidates=len(dormant),
-            positive_nostalgia_candidates=int(sum(row["score"] > 0 for row in dormant.values())),
-            tags_available=tags_available, retained_tag_count=T_test.shape[1],
-            tag_policy="HetRec assignments strictly before cutoff; date-only timestamps interpreted as UTC")
-        return output
     S_test = compute_temporal_affinity_matrix(
         root, user_ids=test_user_ids, item_ids=test_item_ids, cutoff_iso="2009-05-01T00:00:00Z", gamma=0.1, kappa=40.0
     )
